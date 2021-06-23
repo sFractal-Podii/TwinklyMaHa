@@ -7,8 +7,8 @@
 # General application configuration
 use Mix.Config
 
-config :twinkly_maha,
-  ecto_repos: [TwinklyMaha.Repo]
+# config :twinkly_maha,
+#   ecto_repos: [TwinklyMaha.Repo]
 
 # Configures the endpoint
 config :twinkly_maha, TwinklyMahaWeb.Endpoint,
