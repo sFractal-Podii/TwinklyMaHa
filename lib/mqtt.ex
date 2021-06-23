@@ -27,7 +27,7 @@ defmodule Mqtt do
         raise """
         environment variable HOST is missing.
         Examples:
-        export MQTT_HOST="34.86.117.113"
+        export MQTT_HOST="35.221.11.97 "
         export MQTT_HOST="mqtt.sfractal.com"
         """
 
