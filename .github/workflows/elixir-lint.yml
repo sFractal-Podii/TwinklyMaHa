@@ -3,12 +3,12 @@ name: Elixir CI
 on:
   push:
     branches:
-      - fix_failing_ci
+      - develop
       - main
   pull_request:
     branches:
       - main
-      - fix_failing_ci
+      - develop
 
 jobs:
   lint:
