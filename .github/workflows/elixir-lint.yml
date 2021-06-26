@@ -54,5 +54,5 @@ jobs:
         MQTT_PORT: 1883
         USER_NAME: plug
         PASSWORD: fest
-    - name: Check lints
-      run: make lint
+    # - name: Check lints
+    #   run: make lint
