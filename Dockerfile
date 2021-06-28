@@ -37,7 +37,7 @@ RUN mix phx.digest && mix release
 FROM debian:buster-slim AS app
 
 ARG CLIENT_ID=:sfractal2020
-ARG MQTT_HOST=34.86.117.113
+ARG MQTT_HOST=35.221.11.97 
 ARG MQTT_PORT=1883
 ARG USER_NAME=plug
 ARG PASSWORD=fest
