@@ -115,7 +115,7 @@ You might get an error when running this command on a mac, follow [instructions 
 
 ###  SPDX
 
-- [Follow the installation guide](https://github.com/spdx/spdx-sbom-generator) to download the 
+- [Follow the installation guide](https://github.com/spdx/spdx-sbom-generator#installation) to download the 
 spdx-sbom-generator CLI 
 
 - Add the `spdx-sbom-generator CLI` tool to the root of the project and rename it to `spdx-sbom-generator`
