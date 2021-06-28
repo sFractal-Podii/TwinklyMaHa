@@ -56,7 +56,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_dashboard, "~> 0.3.6"},
       {:telemetry_metrics, "~> 0.4"},
       {:telemetry_poller, "~> 0.4"},
-      {:sbom, git: "https://github.com/voltone/sbom"},
+      {:sbom, git: "https://github.com/voltone/sbom", only: :dev, runtime: false},
       {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
