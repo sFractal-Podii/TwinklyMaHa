@@ -28,6 +28,6 @@
     "glob-parent": ">=5.1.2",
     "normalize-url": ">=4.5.1",
     "trim-newlines": ">=3.0.1",
-    "is-svg": ">=4.2.2"
+    "is-svg": ">=4.3.2"
   }
 }
