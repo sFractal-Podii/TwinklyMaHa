@@ -41,7 +41,7 @@ defmodule TwinklyMaha.MixProject do
   defp deps do
     [
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ecto, ">= 3.4.4 and < 3.4.5"},
+      {:ecto, ">= 3.4.4 and < 3.4.7"},
       {:ecto_sql, ">= 3.4.4 and < 3.4.6"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
