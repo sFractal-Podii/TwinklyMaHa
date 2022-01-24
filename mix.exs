@@ -41,24 +41,25 @@ defmodule TwinklyMaha.MixProject do
   defp deps do
     [
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ecto, ">= 3.4.4 and < 3.4.7"},
-      {:ecto_sql, ">= 3.4.4 and < 3.4.6"},
+      {:ecto, ">= 3.6.2"},
+      {:ecto_sql, "~> 3.7"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.0"},
-      {:phoenix, "~> 1.5.3"},
+      {:phoenix, "~> 1.6.0"},
       {:phoenix_ecto, "~> 4.1"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.14.8"},
-      {:phoenix_html, "~> 2.11"},
+      {:phoenix_live_view, "~> 0.16.4"},
+      {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.3.6"},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
+      {:phoenix_live_dashboard, "~> 0.5"},
+      {:telemetry_metrics, "~> 0.6"},
+      {:telemetry_poller, "~> 0.5"},
       {:sbom, git: "https://github.com/voltone/sbom", only: :dev, runtime: false},
       {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
     ]
   end
 
@@ -73,7 +74,8 @@ defmodule TwinklyMaha.MixProject do
       setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.deploy": ["esbuild default --minify", "phx.digest"]
     ]
   end
 
