@@ -22,8 +22,8 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
 
 # Compile assets
 COPY assets ./assets
-RUN npm install --prefix ./assets && \
-    npm run deploy --prefix ./assets
+# RUN npm install --prefix ./assets && \
+#     npm run deploy --prefix ./assets
 
 # Now, let's go with the actual elixir code. The order matters: if we only
 # change elixir code, all the above layers will be cached ~ less image build time.
