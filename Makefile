@@ -6,10 +6,11 @@ APP_VERSION := $(shell grep 'version:' mix.exs | cut -d '"' -f2)
 DOCKER_IMAGE_TAG ?= $(APP_VERSION)
 GIT_REVISION ?= `git rev-parse HEAD`
 CLIENT_ID=:sfractal2020
-MQTT_HOST=35.221.11.97 
+MQTT_HOST=35.221.11.97
 MQTT_PORT=1883
 USER_NAME=plug
 PASSWORD=fest
+IMAGE_URL=gcr.io/duncan-openc2-plugfest/maha
 
 # Introspection targets
 # ---------------------
@@ -79,34 +80,34 @@ release: ## Build a release of the application with MIX_ENV=prod
 
 .PHONY: docker-image
 docker-image:
-	docker build . -t maha:$(APP_VERSION) --no-cache \
+	docker build . -t maha:$(APP_VERSION)  \
 	--build-arg CLIENT_ID=$(CLIENT_ID) \
 	--build-arg MQTT_HOST=$(MQTT_HOST) \
 	--build-arg MQTT_PORT=$(MQTT_PORT) \
 	--build-arg USER_NAME=$(USER_NAME) \
 	--build-arg PASSWORD=$(PASSWORD) \
 
-.PHONY: push-image-gcp push-and-serve deploy-existing-image
+.PHONY: push-imhage-gcp push-and-serve deploy-existing-image
 push-image-gcp: ## push image to gcp
-	@if [[ "$(docker images -q gcr.io/twinklymaha/maha:$(APP_VERSION)> /dev/null)" != "" ]]; then \
+	@if [[ "$(docker images -q $(IMAGE_URL):$(APP_VERSION)> /dev/null)" != "" ]]; then \
   @echo "Removing previous image $(APP_VERSION) from your machine..."; \
-	docker rmi gcr.io/twinklymaha/maha:$(APP_VERSION);\
+	docker rmi $(IMAGE_URL):$(APP_VERSION);\
 	fi
-	docker build . -t gcr.io/twinklymaha/maha:$(APP_VERSION) --no-cache \
+	docker build . -t $(IMAGE_URL):$(APP_VERSION) --no-cache \
 	--build-arg CLIENT_ID=$(CLIENT_ID) \
 	--build-arg MQTT_HOST=$(MQTT_HOST) \
 	--build-arg MQTT_PORT=$(MQTT_PORT) \
 	--build-arg USER_NAME=$(USER_NAME) \
 	--build-arg PASSWORD=$(PASSWORD) \
 
-	gcloud container images delete gcr.io/twinklymaha/maha:$(APP_VERSION) --force-delete-tags  || echo "no image to delete on the remote"
-	docker push gcr.io/twinklymaha/maha:$(APP_VERSION)
+	gcloud container images delete $(IMAGE_URL):$(APP_VERSION) --force-delete-tags  || echo "no image to delete on the remote"
+	docker push $(IMAGE_URL):$(APP_VERSION)
 
 push-and-serve-gcp: push-image-gcp deploy-existing-image
 
 deploy-existing-image:
 	gcloud compute instances create-with-container $(instance-name) \
-		--container-image=gcr.io/twinklymaha/maha:$(DOCKER_IMAGE_TAG) \
+		--container-image=$(IMAGE_URL):$(DOCKER_IMAGE_TAG) \
 		--machine-type=e2-micro \
 		--subnet=default \
 		--network-tier=PREMIUM \
@@ -117,7 +118,7 @@ deploy-existing-image:
 
 .PHONY: update-instance
 update-instance:
-	gcloud compute instances update-container $(instance-name) --container-image gcr.io/twinklymaha/maha:$(image-tag)
+	gcloud compute instances update-container $(instance-name) --container-image gcr.io/duncan-openc2-plugfest/maha:$(image-tag)
 
 .PHONY: sbom
 sbom: ## Generates sbom in SPDX and CyclonedDX format 
