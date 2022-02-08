@@ -10,7 +10,7 @@ MQTT_HOST=35.221.11.97
 MQTT_PORT=1883
 USER_NAME=plug
 PASSWORD=fest
-IMAGE_URL=gcr.io/duncan-openc2-plugfest/maha
+IMAGE_URL=gcr.io/duncan-openc2-plugfest/twinklymaha
 
 # Introspection targets
 # ---------------------
@@ -118,7 +118,7 @@ deploy-existing-image:
 
 .PHONY: update-instance
 update-instance:
-	gcloud compute instances update-container $(instance-name) --container-image gcr.io/duncan-openc2-plugfest/maha:$(image-tag)
+	gcloud compute instances update-container $(instance-name) --container-image $(IMAGE_URL):$(image-tag)
 
 .PHONY: sbom
 sbom: ## Generates sbom in SPDX and CyclonedDX format 
