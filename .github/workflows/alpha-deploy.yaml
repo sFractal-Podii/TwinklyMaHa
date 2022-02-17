@@ -16,10 +16,8 @@ name: Maha-Alpha Deploy
 
 on:
   push:
-    branches:
-      - automate_alpha_build
-    # tags:
-    # - v*-alpha
+    tags:
+    - v*-alpha
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
