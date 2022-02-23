@@ -1,7 +1,7 @@
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: 
+      - published
 
 name: Upload Release Asset
 
@@ -31,25 +31,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Build project
         run: |
-          curl -L -o cyclonedx-cli https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.7.0/cyclonedx-linux-x64
+          curl -L -o cyclonedx-cli https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.22.0/cyclonedx-linux-x64
           chmod a+x cyclonedx-cli
           make sbom
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
       - name: Upload SBOM Json
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./bom.json
           asset_name: bom.json
           asset_content_type: application/octet-stream
@@ -58,7 +48,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./bom.xml
           asset_name: bom.xml
           asset_content_type: application/octet-stream
