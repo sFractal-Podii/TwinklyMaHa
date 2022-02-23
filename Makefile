@@ -123,9 +123,10 @@ update-instance:
 .PHONY: sbom
 sbom: ## Generates sbom in SPDX and CyclonedDX format 
 	mix deps.get && mix sbom.cyclonedx -o elixir_bom.xml
-	cd assets/  && npm install && npm install -g @cyclonedx/bom@2.0.2 && cyclonedx-bom -o ../bom.xml -a ../elixir_bom.xml \
-	&& ../spdx-sbom-generator -o ../ && cd ..
-	./cyclonedx-cli convert --input-file bom.xml --output-file bom.json
+	cd assets/  && npm install && npm install -g @cyclonedx/bom && cyclonedx-bom -o ../bom.xml && cd ..
+	./cyclonedx-cli merge --input-files ./bom.xml ./elixir_bom.xml --output-file bom-all.xml
+	./cyclonedx-cli convert --input-file bom-all.xml --output-file bom.json
+	./cyclonedx-cli convert --input-file bom.json --output-format spdxjson --output-file bom.spdx
 
 
 
