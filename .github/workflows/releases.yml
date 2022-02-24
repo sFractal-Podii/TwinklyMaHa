@@ -1,5 +1,7 @@
 on:
   push:
+    branches:
+      - fix-release-workflow-error
     tags:
       - 'v*'
 
