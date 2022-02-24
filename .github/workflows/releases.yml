@@ -1,7 +1,5 @@
 on:
   push:
-    branches:
-      - fix-release-workflow-error
     tags:
       - 'v*'
 
@@ -42,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: binaries-${{ github.ref }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
