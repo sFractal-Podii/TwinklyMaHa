@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.6.0",
+      version: "0.7.5",
       elixir: "~> 1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -41,13 +41,13 @@ defmodule TwinklyMaha.MixProject do
   defp deps do
     [
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
-      {:ecto, ">= 3.6.2"},
-      {:ecto_sql, "~> 3.7"},
+      {:ecto, ">= 3.7.1"},
+      {:ecto_sql, "~> 3.8.1"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.0"},
-      {:phoenix, "~> 1.6.0"},
+      {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.1"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.16.4"},
@@ -55,7 +55,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 0.5"},
+      {:telemetry_poller, "~> 0.5.1"},
       {:sbom, git: "https://github.com/voltone/sbom", only: :dev, runtime: false},
       {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
