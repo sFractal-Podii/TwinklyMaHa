@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "@cyclonedx/bom": "^3.9.0"
+  }
+}

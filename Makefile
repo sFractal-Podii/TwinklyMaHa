@@ -1,9 +1,12 @@
 # Configuration
 	# -------------
 
-APP_NAME ?= `grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g'`
-APP_VERSION := $(shell grep 'version:' mix.exs | cut -d '"' -f2)
+APP_NAME := $(shell grep 'app:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/app://' -e 's/[:,]//g')
+APP_VERSION := $(shell grep 'version:' mix.exs | sed -e 's/\[//g' -e 's/ //g' -e 's/version://' -e 's/[:,]//g')
 DOCKER_IMAGE_TAG ?= $(APP_VERSION)
+SBOM_FILE_NAME_CY ?= $(APP_NAME).$(APP_VERSION)-cyclonedx-sbom.1.0.0
+SBOM_FILE_NAME_SPDX ?= $(APP_NAME).$(APP_VERSION)-spdx-sbom.1.0.0
+
 GIT_REVISION ?= `git rev-parse HEAD`
 CLIENT_ID=:sfractal2020
 MQTT_HOST=35.221.11.97 
@@ -68,6 +71,28 @@ test: ## Run the test suite
 format: mix format ## Run formatting tools on the code
 
 
+.PHONY: sbom sbom_fast
+sbom: ## creates sbom for both  npm and hex dependancies
+	mix deps.get && mix sbom.cyclonedx -o elixir_bom.xml
+	cd assets/  && npm install && npm install -g @cyclonedx/bom@3.4.1 && cyclonedx-bom -o ../$(SBOM_FILE_NAME_CY).xml && cd ..
+	./cyclonedx-cli merge --name $(APP_NAME) --version $(APP_VERSION) --input-files ./$(SBOM_FILE_NAME_CY).xml ./elixir_bom.xml --output-file $(SBOM_FILE_NAME_CY)-all.xml
+	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY)-all.xml --output-file $(SBOM_FILE_NAME_CY).json
+	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY).json --output-format spdxjson --output-file $(SBOM_FILE_NAME_SPDX).spdx
+	rm $(SBOM_FILE_NAME_CY).xml && mv $(SBOM_FILE_NAME_CY)-all.xml $(SBOM_FILE_NAME_CY).xml
+	cp $(SBOM_FILE_NAME_CY).* priv/static/.well-known/sbom
+	cp $(SBOM_FILE_NAME_SPDX).* priv/static/.well-known/sbom
+
+sbom_fast: ## creates sbom without dependancy instalment, assumes you have cyclonedx-bom javascript package installed globally
+	mix sbom.cyclonedx -o elixir_bom.xml
+	cd assets/ && cyclonedx-bom -o ../$(SBOM_FILE_NAME_CY).xml && cd ..
+	./cyclonedx-cli merge --name $(APP_NAME) --version $(APP_VERSION) --input-files ./$(SBOM_FILE_NAME_CY).xml ./elixir_bom.xml --output-file $(SBOM_FILE_NAME_CY)-all.xml
+	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY)-all.xml --output-file $(SBOM_FILE_NAME_CY).json
+	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY).json --output-format spdxjson --output-file $(SBOM_FILE_NAME_SPDX).spdx
+	rm $(SBOM_FILE_NAME_CY).xml && mv $(SBOM_FILE_NAME_CY)-all.xml $(SBOM_FILE_NAME_CY).xml
+	cp $(SBOM_FILE_NAME_CY).* priv/static/.well-known/sbom
+	cp $(SBOM_FILE_NAME_SPDX).* priv/static/.well-known/sbom
+
+
 release: ## Build a release of the application with MIX_ENV=prod
 	MIX_ENV=prod mix deps.get --only prod
 	MIX_ENV=prod mix compile
@@ -118,13 +143,4 @@ deploy-existing-image:
 .PHONY: update-instance
 update-instance:
 	gcloud compute instances update-container $(instance-name) --container-image gcr.io/twinklymaha/maha:$(image-tag)
-
-.PHONY: sbom
-sbom: ## Generates sbom in SPDX and CyclonedDX format 
-	mix deps.get && mix sbom.cyclonedx -o elixir_bom.xml
-	cd assets/  && npm install && npm install -g @cyclonedx/bom && cyclonedx-bom -o ../bom.xml -a ../elixir_bom.xml \
-	&& ../spdx-sbom-generator -o ../ && cd ..
-	./cyclonedx-cli convert --input-file bom.xml --output-file bom.json
-
-
 
