@@ -75,7 +75,7 @@ format: mix format ## Run formatting tools on the code
 .PHONY: sbom sbom_fast
 sbom: ## creates sbom for both  npm and hex dependancies
 	mix deps.get && mix sbom.cyclonedx -o elixir_bom.xml
-	cd assets/  && npm install && npm install -g @cyclonedx/bom@3.4.1 && cyclonedx-bom -o ../$(SBOM_FILE_NAME_CY).xml && cd ..
+	cd assets/  && npm install -g @cyclonedx/bom@3.4.1 && cyclonedx-bom -o ../$(SBOM_FILE_NAME_CY).xml && cd ..
 	./cyclonedx-cli merge --name $(APP_NAME) --version $(APP_VERSION) --input-files ./$(SBOM_FILE_NAME_CY).xml ./elixir_bom.xml --output-file $(SBOM_FILE_NAME_CY)-all.xml
 	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY)-all.xml --output-file $(SBOM_FILE_NAME_CY).json
 	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY).json --output-format spdxjson --output-file $(SBOM_FILE_NAME_SPDX).spdx
