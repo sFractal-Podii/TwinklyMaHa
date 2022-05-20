@@ -90,8 +90,8 @@ sbom_fast: ## creates sbom without dependancy instalment, assumes you have cyclo
 	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY)-all.xml --output-file $(SBOM_FILE_NAME_CY).json
 	./cyclonedx-cli convert --input-file $(SBOM_FILE_NAME_CY).json --output-format spdxjson --output-file $(SBOM_FILE_NAME_SPDX).spdx
 	rm $(SBOM_FILE_NAME_CY).xml && mv $(SBOM_FILE_NAME_CY)-all.xml $(SBOM_FILE_NAME_CY).xml
-	cp $(SBOM_FILE_NAME_CY).* priv/static/.well-known/sbom
-	cp $(SBOM_FILE_NAME_SPDX).* priv/static/.well-known/sbom
+	cp $(SBOM_FILE_NAME_CY).* priv/static/images
+	cp $(SBOM_FILE_NAME_SPDX).* priv/static/images
 
 
 release: ## Build a release of the application with MIX_ENV=prod
