@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.7.3",
+      version: "0.7.4",
       elixir: "~> 1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -42,7 +42,7 @@ defmodule TwinklyMaha.MixProject do
     [
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ecto, ">= 3.7.1"},
-      {:ecto_sql, "~> 3.7.2"},
+      {:ecto_sql, "~> 3.8.1"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.2"},
