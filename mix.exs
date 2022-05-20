@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.7.4",
+      version: "0.8.0",
       elixir: "~> 1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
@@ -56,7 +56,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_dashboard, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5.1"},
-      {:sbom, git: "https://github.com/voltone/sbom", only: :dev, runtime: false},
+      {:sbom, git: "https://github.com/voltone/sbom", runtime: false},
       {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}

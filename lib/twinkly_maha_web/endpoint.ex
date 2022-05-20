@@ -24,7 +24,7 @@ defmodule TwinklyMahaWeb.Endpoint do
     at: "/",
     from: :twinkly_maha,
     gzip: false,
-    only: ~w(assets fonts images favicon.ico robots.txt)
+    only: ~w(assets fonts images favicon.ico robots.txt .well-known)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
