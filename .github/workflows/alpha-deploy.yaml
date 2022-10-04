@@ -69,6 +69,6 @@ jobs:
       uses: google-github-actions/deploy-cloudrun@v0
       with:
         service: twinklymaha-alpha
-        region: us-east-4
+        region: us-east4
         image: "gcr.io/duncan-openc2-plugfest/twinklymaha:${{ github.ref_name }}"
 
