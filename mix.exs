@@ -4,10 +4,10 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.8.1",
+      version: "0.9.0",
       elixir: "~> 1.11.2",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -42,7 +42,7 @@ defmodule TwinklyMaha.MixProject do
     [
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ecto, ">= 3.7.1"},
-      {:ecto_sql, "~> 3.8.1"},
+      {:ecto_sql, "~> 3.9.0"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.2"},

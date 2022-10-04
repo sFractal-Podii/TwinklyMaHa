@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: 'http://35.245.13.116:4000'
+      url: 'http://35.245.13.116:4000' ##use the one generated on deployment
     env:
       GCE_INSTANCE: ${{ secrets.GCE_INSTANCE }}
       GCE_INSTANCE_ZONE: us-east4-c
@@ -53,15 +53,17 @@ jobs:
     - name: Build
       run: |
         echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
-        docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:$GITHUB_SHA" .
+        docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/duncan-openc2-plugfest/twinklymaha:$GITHUB_SHA"
+        docker push "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
 
-    - name: Deploy
-      run: |-
-        gcloud compute instances update-container "$GCE_INSTANCE" \
-          --zone "$GCE_INSTANCE_ZONE" \
-          --container-image "gcr.io/duncan-openc2-plugfest/twinklymaha:$GITHUB_SHA"
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v0
+      with: 
+        service: twinklymaha-staging 
+        region: us-east4
+        image: "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
