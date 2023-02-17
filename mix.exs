@@ -56,7 +56,11 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_dashboard, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5.1"},
-      {:sbom, git: "https://github.com/voltone/sbom", runtime: false},
+      {:sbom,
+       git: "https://github.com/sigu/sbom.git",
+       only: :dev,
+       branch: "auto-install-bom",
+       runtime: false},
       {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
