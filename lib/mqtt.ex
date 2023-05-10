@@ -73,8 +73,8 @@ defmodule Mqtt do
         client_id: client_id,
         handler: {Mqtt.Handler, [name: client_id]},
         server: server,
-        user_name: user_name,
-        password: password,
+        # user_name: user_name,
+        # password: password,
         subscriptions: [{"sfractal/command", 0}]
       )
   end
