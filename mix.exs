@@ -61,7 +61,7 @@ defmodule TwinklyMaha.MixProject do
        only: :dev,
        branch: "auto-install-bom",
        runtime: false},
-      {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
+      {:tortoise, "~> 0.9"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
     ]
