@@ -63,3 +63,30 @@ lib/mqtt.ex
         subscriptions: [{"sfractal/command", 0}]
       )
 ```
+
+### Turn Led on and off using mosquitto broker 
+
+Once you have started your server on a different device or different terminal , run the command 
+
+Turn led off
+
+```shell
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "off"}, "args": {"response_requested": "complete"}}'
+
+```
+
+Turn led on
+
+```shell
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "on"}, "args": {"response_requested": "complete"}}'
+
+```
+
+Turn led to a different color
+
+```shell
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "rainbow"}, "args": {"response_requested": "complete"}}'
+
+```
+
+When you access `http://localhost:8080/twinkly` you should be able to see a twinky behaviour.
