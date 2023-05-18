@@ -45,7 +45,7 @@ defmodule Oc2.DoQuerySbom do
   end
 
   defp sbom_type_chk({true, target_specifier}) do
-    case Map.has_key?(target_specifier, :type) do
+    case Map.has_key?(target_specifier, "type") do
       true ->
         {true, target_specifier}
 
