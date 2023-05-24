@@ -78,4 +78,19 @@ defmodule DoSetTest do
     assert command.error? == false
     assert command.response.status == 200
   end
+
+  test "led on" do
+    command =
+      %Oc2.Command{
+        error?: false,
+        action: "set",
+        target: "x-sfractal-blinky:led",
+        target_specifier: "on"
+      }
+      |> Oc2.DoSet.do_cmd()
+
+    assert command.error_msg == nil
+    assert command.error? == false
+    assert command.response.status == 200
+  end
 end

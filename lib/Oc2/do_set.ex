@@ -45,6 +45,11 @@ defmodule Oc2.DoSet do
     %Oc2.Command{command | response: %{status: 200}}
   end
 
+  defp set_color("on", command) do
+    Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, @topic, "on")
+    %Oc2.Command{command | response: %{status: 200}}
+  end
+
   defp set_color(color, command) do
     if color in @colors do
       Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, @topic, color)
