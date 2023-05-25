@@ -6,8 +6,9 @@ defmodule Oc2.CheckOc2 do
   - chk_cmd - validate command
   """
 
-  @actions ["query", "set", "cancel", "allow"]
-  @targets ["sbom", "features", "x-sfractal-blinky:hello_world", "x-sfractal-blinky:led"]
+  @actions ["query", "set", "cancel", "allow", "deny"]
+  @targets ["sbom", "features", "x-sfractal-blinky:hello_world",
+            "x-sfractal-blinky:led", "ipv4_net", "ipv6_net"]
   @top_level ["action", "target", "args", "actuator", "command_id"]
   @response ["none", "complete"]
 
