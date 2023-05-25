@@ -2,7 +2,6 @@
     "status": 200,
     "results": {
       "sbom": {
-          {
             "bomFormat": "CycloneDX",
             "specVersion": "1.4",
             "version": 1,
@@ -134,7 +133,6 @@
                 "purl": "pkg:hex/phoenix@1.6.13"
               }
             ]
-          }
+        }
       }
-    }
 }
