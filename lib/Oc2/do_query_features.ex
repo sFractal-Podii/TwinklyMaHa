@@ -4,6 +4,9 @@ defmodule Oc2.DoQueryFeatures do
   blah blah
   """
 
+  @this_version "0.9.1"
+  @this_profile ["sbom", "x-sfractal-blinky"]
+
   require Logger
 
   @doc """
@@ -56,17 +59,15 @@ defmodule Oc2.DoQueryFeatures do
 
     case head do
       "versions" ->
-        Logger.debug("iterate_features - versions")
-        ver = "0.5.2"
-        new_results = Map.put(old_results, :versions, [ver])
+        Logger.debug("cleanup hardcoded iterate_features - versions")
+        new_results = Map.put(old_results, :versions, [@this_version])
         new_output = Map.replace!(output, :results, new_results)
         ## now iterate again
         iterate_features(new_output, tail)
 
       "profiles" ->
-        Logger.debug("iterate_features - profiles")
-        profileout = "Duncan needs to do profiles output"
-        new_results = Map.put(old_results, :profiles, profileout)
+        Logger.debug("clean up hardcoded - iterate_features - profiles")
+        new_results = Map.put(old_results, :profiles, @this_profile)
         new_output = Map.replace!(output, :results, new_results)
         ## now iterate again
         iterate_features(new_output, tail)
