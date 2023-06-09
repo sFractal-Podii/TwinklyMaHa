@@ -29,7 +29,6 @@ defmodule Oc2.DoQueryFeatures do
     cancel: [:command_id]
   }
 
-
   require Logger
 
   @doc """
