@@ -6,6 +6,28 @@ defmodule Oc2.DoQueryFeatures do
 
   @this_version "0.9.1"
   @this_profile ["sbom", "x-sfractal-blinky"]
+  @papairsout = %{
+    query: [
+      :features,
+      :sbom,
+      :"x-sfractal-blinky:hello_world"
+    ],
+    set: [
+      :"x-sfractal-blinky:led",
+      :"x-sfractal-blinky:buzzer",
+      :"x-sfractal-blinky:valve",
+      :"x-sfractal-blinky:spa_key"
+    ],
+    allow: [
+      :ipv4_net,
+      :ipv6_net
+    ],
+    deny: [
+      :ipv4_net,
+      :ipv6_net
+    ],
+    cancel: [:command_id]
+  }
 
   require Logger
 
@@ -75,26 +97,7 @@ defmodule Oc2.DoQueryFeatures do
       "pairs" ->
         Logger.debug("iterate_features - pairs")
 
-        pairsout = %{
-          query: [
-            :features,
-            :sbom,
-            :"x-sfractal-blinky:hello_world"
-          ],
-          set: [
-            :"x-sfractal-blinky:led",
-            :"x-sfractal-blinky:buzzer",
-            :"x-sfractal-blinky:valve",
-            :"x-sfractal-blinky:spa_key"
-          ],
-          allow: [
-            :ipv4_net,
-            :ipv6_net
-          ],
-          cancel: [:command_id]
-        }
-
-        new_results = Map.put(old_results, :pairs, pairsout)
+        new_results = Map.put(old_results, :pairs, @pairsout)
         new_output = Map.replace!(output, :results, new_results)
         ## now iterate again
         iterate_features(new_output, tail)

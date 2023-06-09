@@ -6,10 +6,23 @@ defmodule Oc2.CheckOc2 do
   - chk_cmd - validate command
   """
 
-  @actions ["query", "set", "cancel", "allow"]
-  @targets ["sbom", "features", "x-sfractal-blinky:hello_world", "x-sfractal-blinky:led"]
+  @actions ["query", "set", "cancel", "allow", "deny"]
+  @targets ["sbom", "features", "x-sfractal-blinky:hello_world",
+            "x-sfractal-blinky:led", "ipv4_net", "ipv6_net"]
   @top_level ["action", "target", "args", "actuator", "command_id"]
   @response ["none", "complete"]
+  @action_target_pairs [
+      {"query", "features"},
+      {"query", "sbom"},
+      {"query", "blinky:hello_world"},
+      {"set", "blinky:led"},
+      {"allow", "ipv4_net"},
+      {"allow", "ipv6_net"},
+      {"deny", "ipv4_net"},
+      {"deny", "ipv6_net"}
+    ]
+
+
 
   require Logger
 
@@ -118,8 +131,11 @@ defmodule Oc2.CheckOc2 do
 
   defp check_target(command) do
     if command.target in @targets do
-      # valid so continue
-      command
+      if {command.action, command.target} in @action_target_pairs do
+        # valid so continue
+        command
+      else
+        Oc2.Command.return_error("invalid action:target  #{inspect(command.cmd)} #{inspect(command.target)}")
     else
       Oc2.Command.return_error("invalid target #{inspect(command.target)}")
     end
