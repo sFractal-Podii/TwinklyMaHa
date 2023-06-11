@@ -136,6 +136,7 @@ defmodule Oc2.CheckOc2 do
         command
       else
         Oc2.Command.return_error("invalid action:target  #{inspect(command.cmd)} #{inspect(command.target)}")
+      end
     else
       Oc2.Command.return_error("invalid target #{inspect(command.target)}")
     end
