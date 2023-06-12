@@ -13,6 +13,7 @@ defmodule Oc2.DoQueryFeatures do
       :"x-sfractal-blinky:hello_world"
     ],
     set: [
+      :"blinky:led",
       :"x-sfractal-blinky:led",
       :"x-sfractal-blinky:buzzer",
       :"x-sfractal-blinky:valve",

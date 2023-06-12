@@ -25,7 +25,7 @@ defmodule Oc2.DoSet do
     Oc2.Command.return_error("wrong action in command")
   end
 
-  def do_cmd(%Oc2.Command{target_specifier: color, target: "x-sfractal-blinky:led"} = command) do
+  def do_cmd(%Oc2.Command{target_specifier: color, target: "blinky:led"} = command) do
     set_color(color, command)
   end
 

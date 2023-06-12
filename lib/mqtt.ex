@@ -12,6 +12,7 @@ defmodule Mqtt do
   and starts supervisor of mqtt client
   """
   def start do
+    # client_id = "sfractal2023"
     client_id =
       System.get_env("CLIENT_ID") ||
         raise """
@@ -21,6 +22,9 @@ defmodule Mqtt do
         """
 
     Logger.info("client_id is #{client_id}")
+
+    # mqtt_host = "3271a3ddd2eb43caa7c4b195c7d6cabd.s2.eu.hivemq.cloud"
+    # mqtt_host = "test.mosquitto.org"
 
     mqtt_host =
       System.get_env("MQTT_HOST") ||
@@ -32,6 +36,9 @@ defmodule Mqtt do
         """
 
     Logger.info("mqtt_host is #{mqtt_host}")
+
+    # mqtt_port = 8883
+    # mqtt_port = 1883
 
     mqtt_port =
       String.to_integer(
@@ -47,6 +54,7 @@ defmodule Mqtt do
 
     server = {Tortoise.Transport.Tcp, host: mqtt_host, port: mqtt_port}
 
+    # user_name = "Cav01"
     user_name =
       System.get_env("USER_NAME") ||
         raise """
@@ -57,6 +65,7 @@ defmodule Mqtt do
 
     Logger.info("user_name is #{user_name}")
 
+    # password = "Tango01Village"
     password =
       System.get_env("PASSWORD") ||
         raise """
