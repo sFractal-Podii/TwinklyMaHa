@@ -54,7 +54,6 @@ defmodule Mqtt do
 
     server = {Tortoise.Transport.Tcp, host: mqtt_host, port: mqtt_port}
 
-    # user_name = "Cav01"
     user_name =
       System.get_env("USER_NAME") ||
         raise """
@@ -65,7 +64,6 @@ defmodule Mqtt do
 
     Logger.info("user_name is #{user_name}")
 
-    # password = "Tango01Village"
     password =
       System.get_env("PASSWORD") ||
         raise """
