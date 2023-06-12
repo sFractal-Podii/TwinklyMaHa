@@ -6,7 +6,7 @@ defmodule Oc2.DoQueryFeatures do
 
   @this_version "0.9.1"
   @this_profile ["sbom", "x-sfractal-blinky"]
-  @papairsout = %{
+  @papairsout %{
     query: [
       :features,
       :sbom,
