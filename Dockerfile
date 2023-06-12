@@ -1,5 +1,5 @@
 # heavily borrowed from https://elixirforum.com/t/cannot-find-libtinfo-so-6-when-launching-elixir-app/24101/11?u=sigu
-FROM elixir:1.11.2 AS app_builder
+FROM elixir:1.14-otp-25 AS app_builder
 
 ARG env=prod
 ARG cyclonedx_cli_version=v0.24.0
@@ -30,19 +30,19 @@ COPY lib ./lib
 COPY priv ./priv
 COPY Makefile ./Makefile
 
-RUN make sbom
+#RUN make sbom
 # make sbom for the production docker image
-RUN syft debian:buster-slim -o spdx > debian.buster_slim-spdx-bom.spdx
-RUN syft debian:buster-slim -o spdx-json > debian.buster_slim-spdx-bom.json
-RUN syft debian:buster-slim -o cyclonedx-json > debian.buster_slim-cyclonedx-bom.json
-RUN syft debian:buster-slim -o cyclonedx > debian.buster_slim-cyclonedx-bom.xml
+RUN syft debian:bullseye-slim -o spdx > debian.buster_slim-spdx-bom.spdx
+RUN syft debian:bullseye-slim -o spdx-json > debian.buster_slim-spdx-bom.json
+RUN syft debian:bullseye-slim -o cyclonedx-json > debian.buster_slim-cyclonedx-bom.json
+RUN syft debian:bullseye-slim -o cyclonedx > debian.buster_slim-cyclonedx-bom.xml
 
 RUN cp *bom* ./priv/static/.well-known/sbom/
 RUN mix assets.deploy
 RUN mix release
 
 
-FROM debian:buster-slim AS app
+FROM debian:bullseye-slim AS app
 
 ARG CLIENT_ID=:sfractal2020
 ARG MQTT_HOST=35.221.11.97 
