@@ -52,9 +52,9 @@ defmodule Mqtt.Handler do
   end
 
   @impl true
-  def handle_message(["sfractal", "command"], msg, state) do
+  def handle_message(["oc2", "cmd", "device", "sf_tw_01"], msg, state) do
     Logger.info("id: #{state.name}")
-    Logger.info("topic: sfractal/command")
+    Logger.info("topic: oc2/cmd/device/sf_tw_01")
     Logger.info("msg: #{inspect(msg)}")
 
     {status, result} =
