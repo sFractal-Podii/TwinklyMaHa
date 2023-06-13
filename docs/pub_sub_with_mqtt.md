@@ -71,21 +71,21 @@ Once you have started your server on a different device or different terminal , 
 Turn led off
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "off"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "off"}, "args": {"response_requested": "complete"}}'
 
 ```
 
 Turn led on
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "on"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "on"}, "args": {"response_requested": "complete"}}'
 
 ```
 
 Turn led to a different color
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"x-sfractal-blinky:led": "rainbow"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "rainbow"}, "args": {"response_requested": "complete"}}'
 
 ```
 
