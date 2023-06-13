@@ -4,7 +4,7 @@ defmodule Oc2.DoQueryFeatures do
   blah blah
   """
 
-  @this_version "0.9.3"
+  @this_version "0.9.5"
   @this_profile ["sbom", "blinky", "slpf"]
   @pairsout %{
     query: [
