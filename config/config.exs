@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :twinkly_maha,
   ecto_repos: [TwinklyMaha.Repo]
@@ -26,7 +26,7 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# esbuild config 
+# esbuild config
 config :esbuild,
   version: "0.14.14",
   default: [
