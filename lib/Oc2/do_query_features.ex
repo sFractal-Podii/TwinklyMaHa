@@ -6,7 +6,7 @@ defmodule Oc2.DoQueryFeatures do
 
   @this_version "0.9.3"
   @this_profile ["blinky", "sbom", "slpf"]
-  @pairsout = %{
+  @pairsout %{
     query: [
       :features,
       :sbom,
