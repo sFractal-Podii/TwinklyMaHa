@@ -32,12 +32,12 @@ You can as well add the exports in an `.env` file first then in the terminal run
  Run the following command:
 
  ```shell
- mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m "hello"
+ mosquitto_pub -h "test.mosquitto.org" -t "oc2/cms/device/sf_tw_01" -m "hello"
  ```
 
 -  `test.mosquitto.org` this is the public IP address provided by mosquitto broker . Its added to the application as `MQTT_HOST`
 
-- `sfractal/command` is the topic that the broker is publishing to.
+- `oc2/cms/device/sf_tw_01` is the topic that the broker is publishing to.
 
 - `hello` is the message being published.
 
@@ -60,7 +60,7 @@ lib/mqtt.ex
         server: server,
         # user_name: user_name,
         # password: password,
-        subscriptions: [{"sfractal/command", 0}]
+        subscriptions: [{"oc2/cms/device/sf_tw_01", 0}]
       )
 ```
 
@@ -71,21 +71,21 @@ Once you have started your server on a different device or different terminal , 
 Turn led off
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "off"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "oc2/cms/device/sf_tw_01" -m '{"action": "set", "target": {"led": "off"}, "args": {"response_requested": "complete"}}'
 
 ```
 
 Turn led on
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "on"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "oc2/cms/device/sf_tw_01" -m '{"action": "set", "target": {"led": "on"}, "args": {"response_requested": "complete"}}'
 
 ```
 
 Turn led to a different color
 
 ```shell
-$ mosquitto_pub -h "test.mosquitto.org" -t "sfractal/command" -m '{"action": "set", "target": {"led": "rainbow"}, "args": {"response_requested": "complete"}}'
+$ mosquitto_pub -h "test.mosquitto.org" -t "oc2/cms/device/sf_tw_01" -m '{"action": "set", "target": {"led": "rainbow"}, "args": {"response_requested": "complete"}}'
 
 ```
 

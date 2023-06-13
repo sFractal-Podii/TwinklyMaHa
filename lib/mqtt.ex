@@ -75,7 +75,7 @@ defmodule Mqtt do
         server: server,
         # user_name: user_name,
         # password: password,
-        subscriptions: [{"sfractal/command", 0}]
+        subscriptions: [{"oc2/cms/device/sf_tw_01", 0}]
       )
   end
 end
