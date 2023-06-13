@@ -10,8 +10,8 @@ defmodule Oc2.CheckOc2 do
   @targets [
     "sbom",
     "features",
-    "x-sfractal-blinky:hello_world",
-    "x-sfractal-blinky:led",
+    "hello_world",
+    "led",
     "ipv4_net",
     "ipv6_net"
   ]
@@ -20,9 +20,8 @@ defmodule Oc2.CheckOc2 do
   @action_target_pairs [
     {"query", "features"},
     {"query", "sbom"},
-    {"query", "blinky:hello_world"},
-    {"set", "blinky:led"},
-    {"set", "x-sfractal-blinky:led"},
+    {"query", "hello_world"},
+    {"set", "led"},
     {"allow", "ipv4_net"},
     {"allow", "ipv6_net"},
     {"deny", "ipv4_net"},

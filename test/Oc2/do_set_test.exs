@@ -25,7 +25,7 @@ defmodule DoSetTest do
       %Oc2.Command{
         error?: false,
         action: "set",
-        target: "x-sfractal-blinky:led",
+        target: "led",
         target_specifier: "badcolor"
       }
       |> Oc2.DoSet.do_cmd()
@@ -39,7 +39,7 @@ defmodule DoSetTest do
       %Oc2.Command{
         error?: false,
         action: "set",
-        target: "x-sfractal-blinky:led",
+        target: "led",
         target_specifier: "rainbow"
       }
       |> Oc2.DoSet.do_cmd()
@@ -54,7 +54,7 @@ defmodule DoSetTest do
       %Oc2.Command{
         error?: false,
         action: "set",
-        target: "x-sfractal-blinky:led",
+        target: "led",
         target_specifier: "red"
       }
       |> Oc2.DoSet.do_cmd()
@@ -69,7 +69,7 @@ defmodule DoSetTest do
       %Oc2.Command{
         error?: false,
         action: "set",
-        target: "x-sfractal-blinky:led",
+        target: "led",
         target_specifier: "off"
       }
       |> Oc2.DoSet.do_cmd()
@@ -84,7 +84,7 @@ defmodule DoSetTest do
       %Oc2.Command{
         error?: false,
         action: "set",
-        target: "x-sfractal-blinky:led",
+        target: "led",
         target_specifier: "on"
       }
       |> Oc2.DoSet.do_cmd()

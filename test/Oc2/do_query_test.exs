@@ -196,8 +196,8 @@ defmodule DoQueryTest do
     assert command.response.status == 200
     assert Enum.member?(command.response.results.pairs.query, :features)
     assert Enum.member?(command.response.results.pairs.query, :sbom)
-    assert Enum.member?(command.response.results.pairs.query, :"x-sfractal-blinky:hello_world")
-    assert Enum.member?(command.response.results.pairs.set, :"x-sfractal-blinky:led")
+    assert Enum.member?(command.response.results.pairs.query, :"hello_world")
+    assert Enum.member?(command.response.results.pairs.set, :"led")
   end
 
   test "rate_limit" do
