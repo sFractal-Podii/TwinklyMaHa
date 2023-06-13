@@ -20,7 +20,7 @@ Message received:
 
 ### Mqtt.Handler.handle_message
 * Mqtt.Handler is a behaviour of Tortoise for handling mqtt.
-* When a message arrives on the ???oc2/cms/device/sf_tw_01??? topic,
+* When a message arrives on the ???oc2/cmd/device/sf_tw_01??? topic,
 * Mqtt.Handler.handle_message calls OC2.Command.new 
 which will eventually return with a struct
 
