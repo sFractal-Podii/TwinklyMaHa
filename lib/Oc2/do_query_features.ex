@@ -4,19 +4,19 @@ defmodule Oc2.DoQueryFeatures do
   blah blah
   """
 
-  @this_version "0.9.1"
-  @this_profile ["sbom", "x-sfractal-blinky"]
-  @papairsout = %{
+  @this_version "0.9.3"
+  @this_profile ["blinky", "sbom", "slpf"]
+  @pairsout = %{
     query: [
       :features,
       :sbom,
-      :"x-sfractal-blinky:hello_world"
+      :"hello_world"
     ],
     set: [
-      :"x-sfractal-blinky:led",
-      :"x-sfractal-blinky:buzzer",
-      :"x-sfractal-blinky:valve",
-      :"x-sfractal-blinky:spa_key"
+      :"led",
+      :"buzzer",
+      :"valve",
+      :"spa_key"
     ],
     allow: [
       :ipv4_net,

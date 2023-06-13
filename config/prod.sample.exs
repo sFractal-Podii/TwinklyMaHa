@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # change this to contain the database url
 database_url = "production url"

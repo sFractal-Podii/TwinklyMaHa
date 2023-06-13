@@ -52,6 +52,28 @@ defmodule Mqtt.Handler do
   end
 
   @impl true
+  def handle_message(["oc2/cmd", "command"], msg, state) do
+    Logger.info("id: #{state.name}")
+    Logger.info("topic: oc2/command")
+    Logger.info("msg: #{inspect(msg)}")
+
+    {status, result} =
+      msg
+      # initialize struct
+      |> Oc2.Command.new()
+      # execute
+      |> Oc2.Command.do_cmd()
+      # reply
+      |> Mqtt.Command.return_result()
+
+    Logger.info("handle_msg: status #{inspect(status)}")
+    Logger.info("handle_msg: command #{inspect(result)}")
+    Logger.info("state: #{inspect(state)}")
+    {:ok, state}
+
+  end
+
+  @impl true
   def handle_message(["sfractal", "command"], msg, state) do
     Logger.info("id: #{state.name}")
     Logger.info("topic: sfractal/command")
