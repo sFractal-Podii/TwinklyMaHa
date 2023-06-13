@@ -17,7 +17,7 @@ defmodule Mqtt do
         raise """
         environment variable CLIENT_ID is missing.
         For example:
-        export CLIENT_ID=:sfractal2020
+        export CLIENT_ID=:sfractal2023
         """
 
     Logger.info("client_id is #{client_id}")
@@ -27,8 +27,8 @@ defmodule Mqtt do
         raise """
         environment variable HOST is missing.
         Examples:
-        export MQTT_HOST="35.221.11.97 "
-        export MQTT_HOST="mqtt.sfractal.com"
+        export MQTT_HOST="3271a3ddd2eb43caa7c4b195c7d6cabd.s2.eu.hivemq.cloud"
+        export MQTT_HOST="test.mosquitto.org"
         """
 
     Logger.info("mqtt_host is #{mqtt_host}")
@@ -40,6 +40,7 @@ defmodule Mqtt do
           environment variable MQTT_PORT is missing.
           Example:
           export MQTT_PORT=1883
+          export MQTT_PORT=8883
           """)
       )
 

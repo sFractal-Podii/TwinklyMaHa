@@ -7,15 +7,15 @@ defmodule Oc2.CheckOc2 do
   """
 
   @actions ["query", "set", "cancel", "allow", "deny"]
-  @targets ["sbom", "features", "x-sfractal-blinky:hello_world",
-            "x-sfractal-blinky:led", "ipv4_net", "ipv6_net"]
+  @targets ["sbom", "features", "hello_world",
+            "led", "ipv4_net", "ipv6_net"]
   @top_level ["action", "target", "args", "actuator", "command_id"]
   @response ["none", "complete"]
   @action_target_pairs [
       {"query", "features"},
       {"query", "sbom"},
-      {"query", "blinky:hello_world"},
-      {"set", "blinky:led"},
+      {"query", "hello_world"},
+      {"set", "led"},
       {"allow", "ipv4_net"},
       {"allow", "ipv6_net"},
       {"deny", "ipv4_net"},
