@@ -45,10 +45,10 @@ RUN mix release
 FROM debian:bullseye-slim AS app
 
 ARG CLIENT_ID=:sfractal2020
-ARG MQTT_HOST="test.mosquitto.org"
-ARG MQTT_PORT=1883
-ARG USER_NAME=plug
-ARG PASSWORD=fest
+ARG MQTT_HOST="b-faad036d-e951-4aae-bf64-a171b0a16629-1.mq.us-east-1.amazonaws.com"
+ARG MQTT_PORT=8883
+ARG USER_NAME=Terra
+ARG PASSWORD=Tango94Village
 
 
 ENV LANG=C.UTF-8
