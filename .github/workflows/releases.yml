@@ -45,7 +45,7 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: ./twinkly_maha.0.9.5-cyclonedx-sbom.1.0.0.json
-          asset_name: twinkly_maha.0.9.5-cyclonedx-sbom.1.0.0.xml
+          asset_name: twinkly_maha.0.9.5-cyclonedx-sbom.1.0.0.json
           asset_content_type: application/octet-stream
       - name: Upload SBOM XML
         uses: actions/upload-release-asset@v1
