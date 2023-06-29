@@ -44,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twinkly_maha.0.9.5-cyclonedx-sbom.1.0.0.json
+          asset_path: ./twinkly_maha.0.9.6-cyclonedx-sbom.1.0.0.json
           asset_name: twinkly_maha.0.9.5-cyclonedx-sbom.1.0.0.json
           asset_content_type: application/octet-stream
       - name: Upload SBOM XML
