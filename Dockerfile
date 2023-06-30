@@ -30,7 +30,10 @@ COPY lib ./lib
 COPY priv ./priv
 COPY Makefile ./Makefile
 
-RUN make sbom
+RUN mix sbom.install
+RUN mix sbom.cyclonedx
+RUN mix sbom.convert
+
 # make sbom for the production docker image
 RUN syft debian:bullseye-slim -o spdx > debian.buster_slim-spdx-bom.spdx
 RUN syft debian:bullseye-slim -o spdx-json > debian.buster_slim-spdx-bom.json
