@@ -12,7 +12,7 @@ defmodule Mqtt.Command do
   @doc """
   return result
   """
-  def return_result(%Oc2.Command{error?: true} = command) do
+  def return_result(%Openc2.Oc2.Command{error?: true} = command) do
     ## something went wrong upstream, so return "oops"
     e1 = "Error: "
     e2 = inspect(command.error_msg)
@@ -22,7 +22,7 @@ defmodule Mqtt.Command do
     {:error, error_msg}
   end
 
-  def return_result(%Oc2.Command{response: nil} = command) do
+  def return_result(%Openc2.Oc2.Command{response: nil} = command) do
     ## no response
     {:ok, command}
   end
