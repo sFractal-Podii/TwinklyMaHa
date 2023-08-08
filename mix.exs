@@ -64,7 +64,7 @@ defmodule TwinklyMaha.MixProject do
       {
         :openc2,
         #  only: :dev,
-        git: "https://github.com/sFractal-Podii/openc2.git", branch: "master"
+        git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
       {:tortoise, "<= 0.9.0"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
