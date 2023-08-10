@@ -37,7 +37,10 @@ jobs:
         run: |
           curl -L -o cyclonedx-cli https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.22.0/cyclonedx-linux-x64
           chmod a+x cyclonedx-cli
-           make sbom
+           mix deps.compile
+           mix sbom.install
+           mix sbom.cyclonedx
+           mix sbom.convert
       - name: Upload SBOM Json
         uses: actions/upload-release-asset@v1
         env:
