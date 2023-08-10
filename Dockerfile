@@ -44,7 +44,6 @@ RUN syft debian:bullseye-slim -o cyclonedx-json > debian.buster_slim-cyclonedx-b
 RUN syft debian:bullseye-slim -o cyclonedx > debian.buster_slim-cyclonedx-bom.xml
 
 RUN cp *bom* ./priv/static/.well-known/sbom/
-RUN ls /opt/release/priv/static/.well-known/sbom/
 RUN mix assets.deploy
 RUN mix release
 
