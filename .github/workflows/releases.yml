@@ -1,7 +1,10 @@
 on:
-  release:
-    types: 
-      - published
+  push:
+    branches:
+      - update_release_file
+  # release:
+  #   types: 
+  #     - published
 
 name: Upload Release Asset
 
@@ -37,7 +40,7 @@ jobs:
         run: |
           curl -L -o cyclonedx-cli https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.22.0/cyclonedx-linux-x64
           chmod a+x cyclonedx-cli
-           mix deps.compile
+           mix deps.get && mix deps.compile
            mix sbom.install
            mix sbom.cyclonedx
            mix sbom.convert
