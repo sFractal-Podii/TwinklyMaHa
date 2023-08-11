@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.13.0
+          node-version: 18.17.1
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project
