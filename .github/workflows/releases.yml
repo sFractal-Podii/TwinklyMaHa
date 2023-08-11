@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.json
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.json
           asset_name: twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.json
           asset_content_type: application/octet-stream
       - name: Upload SBOM XML
@@ -56,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.xml
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.xml
           asset_name: twinkly_maha.0.10.0-cyclonedx-sbom.1.0.0.xml
           asset_content_type: application/octet-stream
 
@@ -66,6 +66,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./twinkly_maha.0.10.0-spdx-sbom.1.0.0.spdx
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.0-spdx-sbom.1.0.0.spdx
           asset_name: twinkly_maha.0.10.0-spdx-sbom.1.0.0.spdx
           asset_content_type: application/octet-stream
