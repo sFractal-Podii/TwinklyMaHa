@@ -67,7 +67,7 @@ defmodule TwinklyMaha.MixProject do
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
-      {:tortoise, "<= 0.9.0"},
+      {:tortoise, "<= 0.11.0"},
       {:ex_doc, "~> 0.30.4", only: :dev, runtime: false},
       {:esbuild, "~> 0.7.1", runtime: Mix.env() == :dev}
     ]
