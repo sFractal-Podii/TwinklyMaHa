@@ -42,7 +42,7 @@ defmodule TwinklyMaha.MixProject do
     [
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
       {:ecto, ">= 3.7.1"},
-      {:ecto_sql, "~> 3.9.0"},
+      {:ecto_sql, "~> 3.10.2"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.23.0"},
       {:jason, "~> 1.4.1"},
