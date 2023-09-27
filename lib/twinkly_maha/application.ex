@@ -8,7 +8,7 @@ defmodule TwinklyMaha.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      # TwinklyMaha.Repo,
+      TwinklyMaha.Repo,
       # Start the Telemetry supervisor
       TwinklyMahaWeb.Telemetry,
       # Start the PubSub system

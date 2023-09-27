@@ -1,10 +1,9 @@
 defmodule DoQueryTest do
   use ExUnit.Case
-  doctest Oc2.DoQuery
 
   test "check_cmd_upsteam" do
     command =
-      %Oc2.Command{error?: true, error_msg: "error_msg"}
+      %Openc2.Oc2.Command{error?: true, error_msg: "error_msg"}
       |> Oc2.DoQuery.do_cmd()
 
     assert command.error? == true
@@ -13,7 +12,7 @@ defmodule DoQueryTest do
 
   test "wrong action" do
     command =
-      %Oc2.Command{error?: false, action: "set"}
+      %Openc2.Oc2.Command{error?: false, action: "set"}
       |> Oc2.DoQuery.do_cmd()
 
     assert command.error? == true
@@ -22,7 +21,7 @@ defmodule DoQueryTest do
 
   test "hello world" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "x-sfractal-blinky:hello_world",
@@ -36,7 +35,7 @@ defmodule DoQueryTest do
 
   test "bad hello world" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "x-sfractal-blinky:hello_world",
@@ -50,7 +49,7 @@ defmodule DoQueryTest do
 
   test "invalid action/target" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "hello_world",
@@ -64,7 +63,7 @@ defmodule DoQueryTest do
 
   test "good_sbom" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "sbom",
@@ -81,7 +80,7 @@ defmodule DoQueryTest do
 
   test "sbom_swid" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "sbom",
@@ -95,7 +94,7 @@ defmodule DoQueryTest do
 
   test "sbom_not_list" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "sbom",
@@ -109,7 +108,7 @@ defmodule DoQueryTest do
 
   test "sbom_not_type" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "sbom",
@@ -123,7 +122,12 @@ defmodule DoQueryTest do
 
   test "sbom_not_map" do
     command =
-      %Oc2.Command{error?: false, action: "query", target: "sbom", target_specifier: "cyclonedx"}
+      %Openc2.Oc2.Command{
+        error?: false,
+        action: "query",
+        target: "sbom",
+        target_specifier: "cyclonedx"
+      }
       |> Oc2.DoQuery.do_cmd()
 
     assert command.error? == true
@@ -132,7 +136,7 @@ defmodule DoQueryTest do
 
   test "feature not list" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -146,7 +150,7 @@ defmodule DoQueryTest do
 
   test "invalid feature" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -160,7 +164,12 @@ defmodule DoQueryTest do
 
   test "empty feature" do
     command =
-      %Oc2.Command{error?: false, action: "query", target: "features", target_specifier: []}
+      %Openc2.Oc2.Command{
+        error?: false,
+        action: "query",
+        target: "features",
+        target_specifier: []
+      }
       |> Oc2.DoQuery.do_cmd()
 
     assert command.error? == false
@@ -169,7 +178,7 @@ defmodule DoQueryTest do
 
   test "versions" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -184,7 +193,7 @@ defmodule DoQueryTest do
 
   test "pairs" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -196,13 +205,13 @@ defmodule DoQueryTest do
     assert command.response.status == 200
     assert Enum.member?(command.response.results.pairs.query, :features)
     assert Enum.member?(command.response.results.pairs.query, :sbom)
-    assert Enum.member?(command.response.results.pairs.query, :"hello_world")
-    assert Enum.member?(command.response.results.pairs.set, :"led")
+    assert Enum.member?(command.response.results.pairs.query, :hello_world)
+    assert Enum.member?(command.response.results.pairs.set, :led)
   end
 
   test "rate_limit" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -217,7 +226,7 @@ defmodule DoQueryTest do
 
   test "profiles" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",
@@ -232,7 +241,7 @@ defmodule DoQueryTest do
 
   test "multifeature" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "query",
         target: "features",

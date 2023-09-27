@@ -1,10 +1,9 @@
 defmodule DoSetTest do
   use ExUnit.Case
-  doctest Oc2.DoSet
 
   test "check_cmd_upsteam" do
     command =
-      %Oc2.Command{error?: true, error_msg: "error_msg"}
+      %Openc2.Oc2.Command{error?: true, error_msg: "error_msg"}
       |> Oc2.DoSet.do_cmd()
 
     assert command.error? == true
@@ -13,7 +12,7 @@ defmodule DoSetTest do
 
   test "wrong action" do
     command =
-      %Oc2.Command{error?: false, action: "query"}
+      %Openc2.Oc2.Command{error?: false, action: "query"}
       |> Oc2.DoSet.do_cmd()
 
     assert command.error? == true
@@ -22,7 +21,7 @@ defmodule DoSetTest do
 
   test "wrong led color" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "set",
         target: "led",
@@ -36,7 +35,7 @@ defmodule DoSetTest do
 
   test "rainbow" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "set",
         target: "led",
@@ -51,7 +50,7 @@ defmodule DoSetTest do
 
   test "red" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "set",
         target: "led",
@@ -66,7 +65,7 @@ defmodule DoSetTest do
 
   test "led off" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "set",
         target: "led",
@@ -81,7 +80,7 @@ defmodule DoSetTest do
 
   test "led on" do
     command =
-      %Oc2.Command{
+      %Openc2.Oc2.Command{
         error?: false,
         action: "set",
         target: "led",
