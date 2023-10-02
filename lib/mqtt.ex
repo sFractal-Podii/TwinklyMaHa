@@ -57,7 +57,7 @@ defmodule Mqtt do
 
     Logger.info("user_name is #{user_name}")
 
-    password =
+    _password =
       System.get_env("PASSWORD") ||
         raise """
         environment variable PASSWORD is missing.
