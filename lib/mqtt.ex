@@ -57,7 +57,7 @@ defmodule Mqtt do
 
     Logger.info("user_name is #{user_name}")
 
-    password =
+    _password =
       System.get_env("PASSWORD") ||
         raise """
         environment variable PASSWORD is missing.
@@ -73,9 +73,9 @@ defmodule Mqtt do
         client_id: client_id,
         handler: {Mqtt.Handler, [name: client_id]},
         server: server,
-        user_name: user_name,
-        password: password,
-        subscriptions: [{"sfractal/command", 0}]
+        # user_name: user_name,
+        # password: password,
+        subscriptions: [{"oc2/cmd/device/t01", 0}]
       )
   end
 end

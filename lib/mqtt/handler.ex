@@ -26,7 +26,7 @@ defmodule Mqtt.Handler do
   end
 
   def connection(:down, state) do
-    Logger.warn("Connection has been dropped")
+    Logger.warning("Connection has been dropped")
     {:ok, state}
   end
 
@@ -37,7 +37,7 @@ defmodule Mqtt.Handler do
   end
 
   def subscription({:warn, [requested: req, accepted: qos]}, topic, state) do
-    Logger.warn("Subscribed to #{topic}; requested #{req} but got accepted with QoS #{qos}")
+    Logger.warning("Subscribed to #{topic}; requested #{req} but got accepted with QoS #{qos}")
     {:ok, state}
   end
 
@@ -52,35 +52,45 @@ defmodule Mqtt.Handler do
   end
 
   @impl true
-  def handle_message(["sfractal", "command"], msg, state) do
+  def handle_message(["oc2", "cmd", "device", "t01"], msg, state) do
     Logger.info("id: #{state.name}")
-    Logger.info("topic: sfractal/command")
+    Logger.info("topic: oc2/cmd/device/t01")
     Logger.info("msg: #{inspect(msg)}")
 
-    {status, result} =
+    res =
       msg
-      # initialize struct
-      |> Oc2.Command.new()
+      |> Openc2.Oc2.Command.new()
       # execute
-      |> Oc2.Command.do_cmd()
-      # reply
+      |> Openc2.Oc2.Command.do_cmd()
       |> Mqtt.Command.return_result()
 
-    Logger.info("handle_msg: status #{inspect(status)}")
-    Logger.info("handle_msg: command #{inspect(result)}")
-    Logger.info("state: #{inspect(state)}")
+    case res do
+      {:ok, command} ->
+        Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
+        Logger.info("handle_msg: status :ok")
+        Logger.info("handle_msg: command #{inspect(command)}")
+        Logger.info("state: #{inspect(state)}")
+
+      {:error, msg} ->
+        Logger.error("handle_msg: status :error")
+        Logger.error("handle_msg: #{inspect(msg)}")
+        Logger.error("state: #{inspect(state)}")
+    end
+
+    # check if we can publish from here
+
     {:ok, state}
   end
 
   def handle_message(topic, msg, state) do
-    Logger.info("topic != sfractal/command")
+    Logger.info("topic != oc2/cmd/device/t01")
     Logger.info("#{state.name}, #{Enum.join(topic, "/")} #{inspect(msg)}")
     {:ok, state}
   end
 
   @impl true
   def terminate(reason, _state) do
-    Logger.warn("Client has been terminated with reason: #{inspect(reason)}")
+    Logger.warning("Client has been terminated with reason: #{inspect(reason)}")
     :ok
   end
 end

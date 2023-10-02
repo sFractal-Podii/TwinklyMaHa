@@ -15,7 +15,10 @@ jobs:
 
     name: Run test and check code styles
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        elixir: ['1.14.5']
+        otp: ['25.3.2.2']
     services:
       db:
         env:
@@ -33,11 +36,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up Elixir
-      uses: actions/setup-elixir@v1
+      uses: erlef/setup-beam@v1
       with:
-        elixir-version: '1.11.2' # Define the elixir version [required]
-        otp-version: '22.3' # Define the OTP version [required]
-        experimental-otp: true
+          version-type: loose
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
     - name: Restore dependencies cache
       uses: actions/cache@v2
       with:

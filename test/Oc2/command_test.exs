@@ -14,7 +14,7 @@ defmodule CommandTest do
   test "valid json1" do
     command =
       """
-      {"action": "query", 
+      {"action": "query",
       "target": {"x-sfractal-blinky:hello_world": "Hello"},
       "args": {"response_requested": "complete"}
       }
@@ -240,7 +240,7 @@ defmodule CommandTest do
     assert command.actuator_specifier == nil
     assert command.args == nil
     assert command.cmd_id == nil
-    assert command.target == "x-sfractal-blinky:led"
+    assert command.target == "led"
     assert command.target_specifier == "off"
     assert command.response == "complete"
   end
@@ -256,7 +256,7 @@ defmodule CommandTest do
     assert command.actuator_specifier == nil
     assert command.args == nil
     assert command.cmd_id == nil
-    assert command.target == "x-sfractal-blinky:led"
+    assert command.target == "led"
     assert command.target_specifier == "on"
     assert command.response == "complete"
   end
@@ -272,7 +272,7 @@ defmodule CommandTest do
     assert command.actuator_specifier == nil
     assert command.args == nil
     assert command.cmd_id == nil
-    assert command.target == "x-sfractal-blinky:led"
+    assert command.target == "led"
     assert command.target_specifier == "rainbow"
     assert command.response == "complete"
   end
@@ -288,7 +288,7 @@ defmodule CommandTest do
     assert command.actuator_specifier == nil
     assert command.args == nil
     assert command.cmd_id == nil
-    assert command.target == "x-sfractal-blinky:led"
+    assert command.target == "led"
     assert command.target_specifier == "red"
     assert command.response == "complete"
   end

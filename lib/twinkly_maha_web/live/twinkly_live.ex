@@ -94,7 +94,7 @@ defmodule TwinklyMahaWeb.TwinklyLive do
 
   def handle_info("off", socket) do
     Logger.debug("tlive:hand.info- off")
-    {:noreply, assign(socket, :current_color, "rgba(0, 0, 0, 0.2)")}
+    {:noreply, current_color(socket, "rgba(0, 0, 0, 0.2)", false)}
   end
 
   def handle_info(color, socket)
@@ -125,12 +125,12 @@ defmodule TwinklyMahaWeb.TwinklyLive do
     assign(socket, :current_color, "rainbow")
   end
 
-  defp current_color(socket, _color, false = _led_on?) do
-    assign(socket, :current_color, "rgba(0, 0, 0, 0.2)")
+  defp current_color(socket, color, false = led_on?) do
+    assign(socket, current_color: color, led_on?: led_on?)
   end
 
-  defp current_color(socket, color, true = _led_on?) do
-    assign(socket, :current_color, color)
+  defp current_color(socket, color, true = led_on?) do
+    assign(socket, current_color: color, led_on?: led_on?)
   end
 
   defp toggle_led(socket) do

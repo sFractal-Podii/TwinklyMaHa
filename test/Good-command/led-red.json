@@ -1,4 +1,4 @@
 {"action": "set",
- "target": {"x-sfractal-blinky:led": "red"},
+ "target": {"led": "red"},
  "args": {"response_requested": "complete"}
 }
