@@ -4,10 +4,10 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.7.2",
-      elixir: "~> 1.11.2",
+      version: "0.11.2",
+      elixir: "~> 1.15.4",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -40,26 +40,36 @@ defmodule TwinklyMaha.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
       {:ecto, ">= 3.7.1"},
-      {:ecto_sql, "~> 3.7.2"},
+      {:ecto_sql, "~> 3.9.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.0"},
+      {:gettext, "~> 0.23.0"},
+      {:jason, "~> 1.4.1"},
+      {:plug_cowboy, "~> 2.6.1"},
       {:phoenix, "~> 1.6.6"},
-      {:phoenix_ecto, "~> 4.1"},
+      {:phoenix_ecto, "~> 4.4.2"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.16.4"},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_html, "~> 3.3.1"},
+      {:phoenix_live_reload, "~> 1.4.1", only: :dev},
       {:phoenix_live_dashboard, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5.1"},
-      {:sbom, git: "https://github.com/voltone/sbom", only: :dev, runtime: false},
-      {:tortoise, git: "https://github.com/gausby/tortoise.git", branch: "mqtt-5"},
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
-      {:esbuild, "~> 0.2", runtime: Mix.env() == :dev}
+      {
+        :sbom,
+        only: :dev,
+        git: "https://github.com/sigu/sbom.git",
+        branch: "auto-install-bom",
+        runtime: false
+      },
+      {
+        :openc2,
+        git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
+      },
+      {:tortoise, "<= 0.9.0"},
+      {:ex_doc, "~> 0.30.4", only: :dev, runtime: false},
+      {:esbuild, "~> 0.7.1", runtime: Mix.env() == :dev}
     ]
   end
 

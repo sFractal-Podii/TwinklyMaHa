@@ -20,6 +20,7 @@ defmodule TwinklyMahaWeb.Router do
     live "/", PageLive, :index
     live "/phoenix", PageLive, :index
     live "/twinkly", TwinklyLive, :twinkly
+    live "/.well-known/sbom", SbomLive, :sbom
   end
 
   # Other scopes may use custom stacks.

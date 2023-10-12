@@ -9,14 +9,18 @@ jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        elixir: ['1.15.4']
+        otp: ['25.3.2.2']
     steps:
       - uses: actions/checkout@v2
       - name: Set up Elixir
-        uses: actions/setup-elixir@v1
+        uses: erlef/setup-beam@v1
         with:
-          elixir-version: '1.11.2' # Define the elixir version [required]
-          otp-version: '22.3' # Define the OTP version [required]
-          experimental-otp: true
+          version-type: loose
+          elixir-version: ${{ matrix.elixir }}
+          otp-version: ${{ matrix.otp }}
       - name: Restore dependencies cache
         uses: actions/cache@v2
         with:
@@ -26,22 +30,23 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.13.0
+          node-version: 18.17.1
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project
         run: |
-          curl -L -o cyclonedx-cli https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.22.0/cyclonedx-linux-x64
-          chmod a+x cyclonedx-cli
-          make sbom
+           mix deps.get && mix deps.compile
+           mix sbom.install
+           mix sbom.cyclonedx
+           mix sbom.convert
       - name: Upload SBOM Json
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./bom.json
-          asset_name: bom.json
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.2-cyclonedx-sbom.1.0.0.json
+          asset_name: twinkly_maha.0.10.2-cyclonedx-sbom.1.0.0.json
           asset_content_type: application/octet-stream
       - name: Upload SBOM XML
         uses: actions/upload-release-asset@v1
@@ -49,6 +54,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./bom.xml
-          asset_name: bom.xml
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.2-cyclonedx-sbom.1.0.0.xml
+          asset_name: twinkly_maha.0.10.2-cyclonedx-sbom.1.0.0.xml
+          asset_content_type: application/octet-stream
+
+      - name: Upload SBOM SPDX
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./priv/static/.well-known/sbom/twinkly_maha.0.10.2-spdx-sbom.1.0.0.spdx
+          asset_name: twinkly_maha.0.10.2-spdx-sbom.1.0.0.spdx
           asset_content_type: application/octet-stream

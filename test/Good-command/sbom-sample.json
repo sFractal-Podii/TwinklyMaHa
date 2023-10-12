@@ -1,0 +1,133 @@
+{
+    "bomFormat": "CycloneDX",
+    "specVersion": "1.4",
+    "version": 1,
+    "metadata": {
+      "tools": [
+        {
+          "vendor": "CycloneDX",
+          "name": "Node.js module",
+          "version": "3.4.1",
+          "hashes": [
+            
+          ],
+          "externalReferences": [
+          ]
+        },
+        {
+          "name": "SBoM Mix task for Elixir",
+          "hashes": [
+          ],
+          "externalReferences": [
+          ]
+        }
+      ],
+      "component": {
+        "type": "application",
+        "name": "twinkly_maha",
+        "version": "0.9.0",
+        "licenses": [
+            {
+                "license": {
+                  "id": "MIT"
+                }
+              }
+        ]
+      },
+      "licenses": [
+        
+      ]
+    },
+    "components": [
+      {
+        "type": "library",
+        "name": "gen_state_machine",
+        "version": "2.1.0",
+        "description": "An Elixir wrapper for gen_statem.",
+        "hashes": [
+          {
+            "alg": "SHA-256",
+            "content": "a38b0e53fad812d29ec149f0d354da5d1bc0d7222c3711f3a0bd5aa608b42992"
+          }
+        ],
+        "licenses": [
+          {
+            "license": {
+              "id": "Apache-2.0"
+            }
+          }
+        ],
+        "purl": "pkg:hex/gen_state_machine@2.1.0"
+      },
+      {
+        "type": "library",
+        "name": "jason",
+        "version": "1.4.0",
+        "description": "A blazing fast JSON parser and generator in pure Elixir.",
+        "hashes": [
+          {
+            "alg": "SHA-256",
+            "content": "e855647bc964a44e2f67df589ccf49105ae039d4179db7f6271dfd3843dc27e6"
+          }
+        ],
+        "licenses": [
+          {
+            "license": {
+              "id": "Apache-2.0"
+            }
+          }
+        ],
+        "purl": "pkg:hex/jason@1.4.0"
+      },
+      {
+        "type": "library",
+        "name": "tortoise",
+        "version": "dfb3e3e5a6e6348fbc7015a7f2ed957a4a1e6517",
+        "licenses": [
+          
+        ],
+        "purl": "pkg:github/gausby/tortoise@dfb3e3e5a6e6348fbc7015a7f2ed957a4a1e6517"
+      },
+      {
+        "type": "library",
+        "name": "plug_crypto",
+        "version": "1.2.3",
+        "description": "Crypto-related functionality for the web",
+        "hashes": [
+          {
+            "alg": "SHA-256",
+            "content": "8f77d13aeb32bfd9e654cb68f0af517b371fb34c56c9f2b58fe3df1235c1251a"
+          }
+        ],
+        "licenses": [
+          {
+            "license": {
+              "id": "Apache-2.0"
+            }
+          }
+        ],
+        "purl": "pkg:hex/plug_crypto@1.2.3"
+      },
+      {
+        "type": "library",
+        "name": "phoenix",
+        "version": "1.6.13",
+        "description": "Productive. Reliable. Fast. A productive web framework that\ndoes not compromise speed or maintainability.",
+        "hashes": [
+          {
+            "alg": "SHA-256",
+            "content": "5b3152907afdb8d3a6cdafb4b149e8aa7aabbf1422fd9f7ef4c2a67ead57d24a"
+          }
+        ],
+        "licenses": [
+          {
+            "license": {
+              "id": "MIT"
+            }
+          }
+        ],
+        "cpe": "cpe:2.3:a:phoenixframework:phoenix:1.6.13:*:*:*:*:*:*:*",
+        "purl": "pkg:hex/phoenix@1.6.13"
+      }
+    ]
+  }
