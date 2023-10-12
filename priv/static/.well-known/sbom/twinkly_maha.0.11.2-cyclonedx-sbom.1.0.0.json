@@ -1,0 +1,696 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.3",
+  "serialNumber": "050e4806-b3f2-4453-915a-7a7cfaf9c47d",
+  "metadata": {
+    "timestamp": "2023-10-12T04:26:43Z",
+    "tools": [
+      {
+        "name": "SBoM Mix task for Elixir"
+      }
+    ],
+    "component": {
+      "type": "library",
+      "name": "NO_NAME_PACKAGE",
+      "version": "",
+      "description": "Description goes here",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ]
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "name": "gen_state_machine",
+      "version": "2.1.0",
+      "description": "An Elixir wrapper for gen_statem.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a38b0e53fad812d29ec149f0d354da5d1bc0d7222c3711f3a0bd5aa608b42992"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/gen_state_machine@2.1.0"
+    },
+    {
+      "type": "library",
+      "name": "connection",
+      "version": "1.1.0",
+      "description": "Connection behaviour for connection processes",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ff2a49c4b75b6fb3e674bfc5536451607270aac754ffd1bdfe175abe4a6d7a68"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/connection@1.1.0"
+    },
+    {
+      "type": "library",
+      "name": "decimal",
+      "version": "2.1.1",
+      "description": "Arbitrary precision decimal arithmetic.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5611dca5d4b2c3dd497dec8f68751f1f1a54755e8ed2a966c2633cf885973ad6"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/decimal@2.1.1"
+    },
+    {
+      "type": "library",
+      "name": "mime",
+      "version": "2.0.5",
+      "description": "A MIME type module for Elixir",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "dc34c8efd439abe6ae0343edbb8556f4d63f178594894720607772a041b04b02"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/mime@2.0.5"
+    },
+    {
+      "type": "library",
+      "name": "telemetry",
+      "version": "0.4.3",
+      "description": "Dynamic dispatching library for metrics and instrumentations",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a06428a514bdbc63293cd9a6263aad00ddeb66f608163bdec7c8995784080818"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/telemetry@0.4.3"
+    },
+    {
+      "type": "library",
+      "name": "telemetry_metrics",
+      "version": "0.6.1",
+      "description": "Provides a common interface for defining metrics based on Telemetry events.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "315d9163a1d4660aedc3fee73f33f1d355dcc76c5c3ab3d59e76e3edf80eef1f"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/telemetry_metrics@0.6.1"
+    },
+    {
+      "type": "library",
+      "name": "telemetry_poller",
+      "version": "0.5.1",
+      "description": "Periodically collect measurements and dispatch them as Telemetry events.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "21071cc2e536810bac5628b935521ff3e28f0303e770951158c73eaaa01e962a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/telemetry_poller@0.5.1"
+    },
+    {
+      "type": "library",
+      "name": "jason",
+      "version": "1.4.1",
+      "description": "A blazing fast JSON parser and generator in pure Elixir.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "af1504e35f629ddcdd6addb3513c3853991f694921b1b9368b0bd32beb9f1b63"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/jason@1.4.1"
+    },
+    {
+      "type": "library",
+      "name": "openc2",
+      "version": "52bf3c10fa5bda9a4a5fee44d151f889299473aa",
+      "purl": "pkg:github/sfractal-podii/openc2@52bf3c10fa5bda9a4a5fee44d151f889299473aa"
+    },
+    {
+      "type": "library",
+      "name": "db_connection",
+      "version": "2.4.2",
+      "description": "Database connection behaviour for database transactions and connection pooling",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f92e79aff2375299a16bcb069a14ee8615c3414863a6fef93156aee8e86c2ff3"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/db_connection@2.4.2"
+    },
+    {
+      "type": "library",
+      "name": "expo",
+      "version": "0.4.1",
+      "description": "Low-level Gettext file handling (.po/.pot/.mo file writer and parser).",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1c61d18a5df197dfda38861673d392e642649a9cef7694d2f97a587b2cfb319b"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/expo@0.4.1"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_pubsub",
+      "version": "2.1.3",
+      "description": "Distributed PubSub and Presence platform",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "3168d78ba41835aecad272d5e8cd51aa87a7ac9eb836eabc42f6e57538e3731d"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_pubsub@2.1.3"
+    },
+    {
+      "type": "library",
+      "name": "plug_crypto",
+      "version": "1.2.5",
+      "description": "Crypto-related functionality for the web",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "918772575e48e81e455818229bf719d4ab4181fcbf7f85b68a35620f78d89ced"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/plug_crypto@1.2.5"
+    },
+    {
+      "type": "library",
+      "name": "gettext",
+      "version": "0.23.1",
+      "description": "Internationalization and localization through gettext",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "821e619a240e6000db2fc16a574ef68b3bd7fe0167ccc264a81563cc93e67a31"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/gettext@0.23.1"
+    },
+    {
+      "type": "library",
+      "name": "ranch",
+      "version": "1.8.0",
+      "description": "Socket acceptor pool for TCP protocols.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8c7a100a139fd57f17327b6413e4167ac559fbc04ca7448e9be9057311597a1d"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "purl": "pkg:hex/ranch@1.8.0"
+    },
+    {
+      "type": "library",
+      "name": "ecto",
+      "version": "3.9.6",
+      "description": "A toolkit for data mapping and language integrated query for Elixir",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2f420c173efcb2e22fa4f8fc41e75e02b3c5bd4cffef12085cae5418c12e530d"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/ecto@3.9.6"
+    },
+    {
+      "type": "library",
+      "name": "plug",
+      "version": "1.14.2",
+      "description": "Compose web applications with functions",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "cff7d4ec45b4ae176a227acd94a7ab536d9b37b942c8e8fa6dfc0fff98ff4d80"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:elixir-plug:plug:1.14.2:*:*:*:*:*:*:*",
+      "purl": "pkg:hex/plug@1.14.2"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_html",
+      "version": "3.3.2",
+      "description": "Phoenix view functions for working with HTML templates",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "d6ce982c6d8247d2fc0defe625255c721fb8d5f1942c5ac051f6177bffa5973f"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_html@3.3.2"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_template",
+      "version": "1.0.3",
+      "description": "Template rendering for Phoenix",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "32de561eefcefa951aead30a1f94f1b5f0379bc9e340bb5c667f65f1edfa4326"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_template@1.0.3"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_view",
+      "version": "2.0.2",
+      "description": "The view layer in Phoenix v1.0-v1.6 apps",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "6bd4d2fd595ef80d33b439ede6a19326b78f0f1d8d62b9a318e3d9c1af351098"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_view@2.0.2"
+    },
+    {
+      "type": "library",
+      "name": "postgrex",
+      "version": "0.16.5",
+      "description": "PostgreSQL driver for Elixir",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fcc4035cc90e23933c5d69a9cd686e329469446ef7abba2cf70f08e2c4b69810"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/postgrex@0.16.5"
+    },
+    {
+      "type": "library",
+      "name": "eqc_ex",
+      "version": "1.4.2",
+      "description": "Wrappers to facilitate using Quviq QuickCheck with Elixir.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "c89322cf8fbd4f9ddcb18141fb162a871afd357c55c8c0198441ce95ffe2e105"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "name": "BSD"
+          }
+        }
+      ],
+      "purl": "pkg:hex/eqc_ex@1.4.2"
+    },
+    {
+      "type": "library",
+      "name": "tortoise",
+      "version": "0.9.0",
+      "description": "A MQTT client for Elixir.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1e774214750428add76824fd667bfab9ad93377f6cd4b738fd7fcbf3f569297c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/tortoise@0.9.0"
+    },
+    {
+      "type": "library",
+      "name": "ecto_sql",
+      "version": "3.9.0",
+      "description": "SQL-based adapters for Ecto and database migrations",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "2bb21210a2a13317e098a420a8c1cc58b0c3421ab8e3acfa96417dab7817918c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/ecto_sql@3.9.0"
+    },
+    {
+      "type": "library",
+      "name": "castore",
+      "version": "1.0.3",
+      "description": "Up-to-date CA certificate store.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7130ba6d24c8424014194676d608cb989f62ef8039efd50ff4b3f33286d06db8"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/castore@1.0.3"
+    },
+    {
+      "type": "library",
+      "name": "esbuild",
+      "version": "0.7.1",
+      "description": "Mix tasks for installing and invoking esbuild",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "fa0947e8c3c3c2f86c9bf7e791a0a385007ccd42b86885e8e893bdb6631f5169"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/esbuild@0.7.1"
+    },
+    {
+      "type": "library",
+      "name": "cowlib",
+      "version": "2.12.1",
+      "description": "Support library for manipulating Web protocols.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "a9fa9a625f1d2025fe6b462cb865881329b5caff8f1854d1cbc9f9533f00e1e1"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "purl": "pkg:hex/cowlib@2.12.1"
+    },
+    {
+      "type": "library",
+      "name": "cowboy",
+      "version": "2.10.0",
+      "description": "Small, fast, modern HTTP server.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ff9ffeff91dae4ae270dd975642997afe2a1179d94b1887863e43f681a203e26"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "purl": "pkg:hex/cowboy@2.10.0"
+    },
+    {
+      "type": "library",
+      "name": "cowboy_telemetry",
+      "version": "0.3.1",
+      "description": "Telemetry instrumentation for Cowboy",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ebd1a1d7aff97f27c66654e78ece187abdc646992714164380d8a041eda16754"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/cowboy_telemetry@0.3.1"
+    },
+    {
+      "type": "library",
+      "name": "plug_cowboy",
+      "version": "2.6.1",
+      "description": "A Plug adapter for Cowboy",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9a3bbfceeb65eff5f39dab529e5cd79137ac36e913c02067dba3963a26efe9b2"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "purl": "pkg:hex/plug_cowboy@2.6.1"
+    },
+    {
+      "type": "library",
+      "name": "phoenix",
+      "version": "1.6.16",
+      "description": "Productive. Reliable. Fast. A productive web framework that\ndoes not compromise speed or maintainability.",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e5bdd18c7a06da5852a25c7befb72246de4ddc289182285f8685a40b7b5f5451"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:phoenixframework:phoenix:1.6.16:*:*:*:*:*:*:*",
+      "purl": "pkg:hex/phoenix@1.6.16"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_live_view",
+      "version": "0.16.4",
+      "description": "Rich, real-time user experiences with server-rendered HTML",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "5692edd0bac247a9a816eee7394e32e7a764959c7d0cf9190662fc8b0cd24c97"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_live_view@0.16.4"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_live_dashboard",
+      "version": "0.5.3",
+      "description": "Real-time performance dashboard for Phoenix",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "ff153c46aee237dd7244f07e9b98d557fe0d1de7a5916438e634c3be2d13c607"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_live_dashboard@0.5.3"
+    },
+    {
+      "type": "library",
+      "name": "phoenix_ecto",
+      "version": "4.4.2",
+      "description": "Integration between Phoenix \u0026 Ecto",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "b21bd01fdeffcfe2fab49e4942aa938b6d3e89e93a480d4aee58085560a0bc0d"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "purl": "pkg:hex/phoenix_ecto@4.4.2"
+    }
+  ]
+}
