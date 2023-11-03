@@ -53,7 +53,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_view, "~> 0.16.4"},
       {:phoenix_html, "~> 3.3.1"},
       {:phoenix_live_reload, "~> 1.4.1", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.5"},
+      # {:phoenix_live_dashboard, "~> 0.5"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 0.5.1"},
       {
@@ -67,7 +67,10 @@ defmodule TwinklyMaha.MixProject do
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
-      {:tortoise, "<= 0.9.0"},
+      # {:tortoise, "<= 0.9.0"},
+      {:exmqtt, github: "ryanwinchester/exmqtt", branch: "master"},
+      {:gun, "~> 1.3.0", override: true},
+      {:cowlib, "~> 2.6.0", override: true},
       {:ex_doc, "~> 0.30.4", only: :dev, runtime: false},
       {:esbuild, "~> 0.7.1", runtime: Mix.env() == :dev}
     ]

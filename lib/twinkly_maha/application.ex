@@ -14,9 +14,9 @@ defmodule TwinklyMaha.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: TwinklyMaha.PubSub},
       # Start the Endpoint (http/https)
-      TwinklyMahaWeb.Endpoint,
+      TwinklyMahaWeb.Endpoint
       # start mqtt connection
-      {Tortoise.Supervisor,
+      {ExMQTT.Supervisor,
        [
          name: Oc2Mqtt.Connection.Supervisor,
          strategy: :one_for_one

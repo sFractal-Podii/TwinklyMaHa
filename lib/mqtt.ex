@@ -67,15 +67,38 @@ defmodule Mqtt do
 
     Logger.info("password set")
 
-    {:ok, _} =
-      Tortoise.Supervisor.start_child(
-        Oc2Mqtt.Connection.Supervisor,
-        client_id: client_id,
-        handler: {Mqtt.Handler, [name: client_id]},
-        server: server,
-        # user_name: user_name,
-        # password: password,
-        subscriptions: [{"oc2/cmd/device/t01", 0}]
-      )
+    # {:ok, _} =
+    #   Tortoise.Supervisor.start_child(
+    #     Oc2Mqtt.Connection.Supervisor,
+    #     client_id: client_id,
+    #     handler: {Mqtt.Handler, [name: client_id]},
+    #     server: server,
+    #     # user_name: user_name,
+    #     # password: password,
+    #     subscriptions: [{"oc2/cmd/device/t01", 0}]
+    #   )
+    opts = [
+      host: mqtt_host,
+      port: mqtt_port,
+      protocol_version: :"5",
+      ssl: true,
+      client_id: client_id,
+      # username: user_name,
+      # password: password,
+      clean_start: false,
+      ssl_opts: [
+        cacerts: :certifi.cacerts(),
+        keyfile: ~c"/etc/mqtt/certs/client.key",
+        certfile: ~c"/etc/mqtt/certs/client.crt"
+      ],
+      start_when: {{Oc2Mqtt.Connection.Supervisor, :connected?, []}, 2000},
+      message_handler: {Mqtt.Handler, []},
+      subscriptions: [
+        {"foo/#", 1},
+        {"baz/+", 0}
+      ]
+    ]
+
+    ExMQTT.Supervisor.start_link(opts) |> IO.inspect(label: "start+++++++++++++++")
   end
 end

@@ -6,91 +6,112 @@ defmodule Mqtt.Handler do
   OpenC2 parsing and execution
   """
 
-  require Logger
+  # require Logger
 
-  defstruct [:name]
-  alias __MODULE__, as: State
+  # defstruct [:name]
+  # alias __MODULE__, as: State
 
-  @behaviour Tortoise.Handler
-
-  @impl true
-  def init(opts) do
-    name = Keyword.get(opts, :name)
-    {:ok, %State{name: name}}
-  end
+  @behaviour ExMQTT.MessageHandler
 
   @impl true
-  def connection(:up, state) do
-    Logger.info("MQTT Connection has been established")
-    {:ok, state}
+  def handle_message(["foo", "bar"], message, _extra) do
+    IO.inspect(message, label: "=====================1")
+    # Matches on "foo/bar"
   end
 
-  def connection(:down, state) do
-    Logger.warning("Connection has been dropped")
-    {:ok, state}
+  def handle_message(["foo", "bar" | _rest], message, _extra) do
+    IO.inspect(message, label: "=====================2")
+    # Matches on "foo/bar/#"
   end
 
-  @impl true
-  def subscription(:up, topic, state) do
-    Logger.info("Subscribed to #{topic}")
-    {:ok, state}
+  def handle_message(["baz", buzz], message, _extra) do
+    IO.inspect(message, label: "=====================3")
+    # Matches on "baz/+"
   end
 
-  def subscription({:warn, [requested: req, accepted: qos]}, topic, state) do
-    Logger.warning("Subscribed to #{topic}; requested #{req} but got accepted with QoS #{qos}")
-    {:ok, state}
+  def handle_message(topic, message, _extra) do
+    IO.inspect(message, label: "=====================4")
+    # Catch-all
   end
 
-  def subscription({:error, reason}, topic, state) do
-    Logger.error("Error subscribing to #{topic}; #{inspect(reason)}")
-    {:ok, state}
-  end
+  # @impl true
+  # def init(opts) do
+  #   name = Keyword.get(opts, :name)
+  #   {:ok, %State{name: name}}
+  # end
 
-  def subscription(:down, topic, state) do
-    Logger.info("Unsubscribed from #{topic}")
-    {:ok, state}
-  end
+  # @impl true
+  # def connection(:up, state) do
+  #   Logger.info("MQTT Connection has been established")
+  #   {:ok, state}
+  # end
 
-  @impl true
-  def handle_message(["oc2", "cmd", "device", "t01"], msg, state) do
-    Logger.info("id: #{state.name}")
-    Logger.info("topic: oc2/cmd/device/t01")
-    Logger.info("msg: #{inspect(msg)}")
+  # def connection(:down, state) do
+  #   Logger.warning("Connection has been dropped")
+  #   {:ok, state}
+  # end
 
-    res =
-      msg
-      |> Openc2.Oc2.Command.new()
-      # execute
-      |> Openc2.Oc2.Command.do_cmd()
-      |> Mqtt.Command.return_result()
+  # @impl true
+  # def subscription(:up, topic, state) do
+  #   Logger.info("Subscribed to #{topic}")
+  #   {:ok, state}
+  # end
 
-    case res do
-      {:ok, command} ->
-        Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
-        Logger.info("handle_msg: status :ok")
-        Logger.info("handle_msg: command #{inspect(command)}")
-        Logger.info("state: #{inspect(state)}")
+  # def subscription({:warn, [requested: req, accepted: qos]}, topic, state) do
+  #   Logger.warning("Subscribed to #{topic}; requested #{req} but got accepted with QoS #{qos}")
+  #   {:ok, state}
+  # end
 
-      {:error, msg} ->
-        Logger.error("handle_msg: status :error")
-        Logger.error("handle_msg: #{inspect(msg)}")
-        Logger.error("state: #{inspect(state)}")
-    end
+  # def subscription({:error, reason}, topic, state) do
+  #   Logger.error("Error subscribing to #{topic}; #{inspect(reason)}")
+  #   {:ok, state}
+  # end
 
-    # check if we can publish from here
+  # def subscription(:down, topic, state) do
+  #   Logger.info("Unsubscribed from #{topic}")
+  #   {:ok, state}
+  # end
 
-    {:ok, state}
-  end
+  # @impl true
+  # def handle_message(["oc2", "cmd", "device", "t01"], msg, state) do
+  #   Logger.info("id: #{state.name}")
+  #   Logger.info("topic: oc2/cmd/device/t01")
+  #   Logger.info("msg: #{inspect(msg)}")
 
-  def handle_message(topic, msg, state) do
-    Logger.info("topic != oc2/cmd/device/t01")
-    Logger.info("#{state.name}, #{Enum.join(topic, "/")} #{inspect(msg)}")
-    {:ok, state}
-  end
+  #   res =
+  #     msg
+  #     |> Openc2.Oc2.Command.new()
+  #     # execute
+  #     |> Openc2.Oc2.Command.do_cmd()
+  #     |> Mqtt.Command.return_result()
 
-  @impl true
-  def terminate(reason, _state) do
-    Logger.warning("Client has been terminated with reason: #{inspect(reason)}")
-    :ok
-  end
+  #   case res do
+  #     {:ok, command} ->
+  #       Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
+  #       Logger.info("handle_msg: status :ok")
+  #       Logger.info("handle_msg: command #{inspect(command)}")
+  #       Logger.info("state: #{inspect(state)}")
+
+  #     {:error, msg} ->
+  #       Logger.error("handle_msg: status :error")
+  #       Logger.error("handle_msg: #{inspect(msg)}")
+  #       Logger.error("state: #{inspect(state)}")
+  #   end
+
+  #   # check if we can publish from here
+
+  #   {:ok, state}
+  # end
+
+  # def handle_message(topic, msg, state) do
+  #   Logger.info("topic != oc2/cmd/device/t01")
+  #   Logger.info("#{state.name}, #{Enum.join(topic, "/")} #{inspect(msg)}")
+  #   {:ok, state}
+  # end
+
+  # @impl true
+  # def terminate(reason, _state) do
+  #   Logger.warning("Client has been terminated with reason: #{inspect(reason)}")
+  #   :ok
+  # end
 end
