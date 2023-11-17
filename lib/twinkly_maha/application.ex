@@ -14,13 +14,14 @@ defmodule TwinklyMaha.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: TwinklyMaha.PubSub},
       # Start the Endpoint (http/https)
-      TwinklyMahaWeb.Endpoint,
+      # TwinklyMahaWeb.Endpoint,
       # start mqtt connection
-      {Tortoise.Supervisor,
-       [
-         name: Oc2Mqtt.Connection.Supervisor,
-         strategy: :one_for_one
-       ]}
+      Emqtt
+      # {Tortoise.Supervisor,
+      #  [
+      #    name: Oc2Mqtt.Connection.Supervisor,
+      #    strategy: :one_for_one
+      #  ]}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -28,7 +29,7 @@ defmodule TwinklyMaha.Application do
     opts = [strategy: :one_for_one, name: TwinklyMaha.Supervisor]
     Supervisor.start_link(children, opts)
     # start connection
-    Mqtt.start()
+    # Mqtt.start()
   end
 
   # Tell Phoenix to update the endpoint configuration
