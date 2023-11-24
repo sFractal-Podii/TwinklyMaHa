@@ -56,13 +56,35 @@ defmodule Emqtt do
          %{payload: payload},
          state
        ) do
-    IO.inspect(topic, label: "command topic")
-    IO.inspect(payload, label: "[[[[[[[[[payload")
+    Logger.info("topic: oc2/cmd/device/t01")
+    Logger.info("msg: #{inspect(payload)}")
     # handle the message , turn led on and off
+
+    res =
+      payload
+      |> Openc2.Oc2.Command.new()
+      |> Openc2.Oc2.Command.do_cmd()
+      |> Mqtt.Command.return_result()
+
+    case res do
+      {:ok, command} ->
+        Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
+        Logger.info("handle_msg: status :ok")
+        Logger.info("handle_msg: command #{inspect(command)}")
+        Logger.info("state: #{inspect(state)}")
+
+      {:error, msg} ->
+        Logger.error("handle_msg: status :error")
+        Logger.error("handle_msg: #{inspect(msg)}")
+        Logger.error("state: #{inspect(state)}")
+    end
+
     {:noreply, state}
   end
 
-  defp handle_publish(topic, _, state) do
+  defp handle_publish(topic, %{payload: payload}, state) do
+    Logger.info("topic != oc2/cmd/device/t01")
+    Logger.info("#{Enum.join(topic, "/")} #{inspect(payload)}")
     {:noreply, state}
   end
 
