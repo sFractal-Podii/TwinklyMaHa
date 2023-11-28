@@ -50,8 +50,8 @@ RUN mix release
 
 FROM debian:bullseye-slim AS app
 
-ARG CLIENT_ID=:sfractal2020
-ARG MQTT_HOST="test.mosquitto.org"
+ARG CLIENT_ID=sfractal2020
+ARG MQTT_HOST="broker.emqx.io"
 ARG MQTT_PORT=1883
 ARG USER_NAME=plug
 ARG PASSWORD=fest
