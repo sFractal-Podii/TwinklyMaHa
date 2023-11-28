@@ -1,4 +1,5 @@
 defmodule Emqtt do
+  @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
   require Logger
 
