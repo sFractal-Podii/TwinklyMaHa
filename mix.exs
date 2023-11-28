@@ -67,7 +67,6 @@ defmodule TwinklyMaha.MixProject do
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
-      # {:tortoise, "<= 0.9.0"},
       {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
       {:cowlib, "~> 2.11.0", override: true},
       {:ex_doc, "~> 0.30.4", only: :dev, runtime: false},
