@@ -17,7 +17,7 @@ name: Staging Deploy
 on:
   push:
     branches:
-    - add_emqx
+    - develop
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
