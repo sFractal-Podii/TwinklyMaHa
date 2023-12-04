@@ -16,19 +16,13 @@ defmodule TwinklyMaha.Application do
       # Start the Endpoint (http/https)
       TwinklyMahaWeb.Endpoint,
       # start mqtt connection
-      {Tortoise.Supervisor,
-       [
-         name: Oc2Mqtt.Connection.Supervisor,
-         strategy: :one_for_one
-       ]}
+      Emqtt
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TwinklyMaha.Supervisor]
     Supervisor.start_link(children, opts)
-    # start connection
-    Mqtt.start()
   end
 
   # Tell Phoenix to update the endpoint configuration

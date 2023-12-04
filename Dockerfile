@@ -1,8 +1,9 @@
 # heavily borrowed from https://elixirforum.com/t/cannot-find-libtinfo-so-6-when-launching-elixir-app/24101/11?u=sigu
-FROM hexpm/elixir:1.15.4-erlang-26.0.2-debian-bullseye-20230612 AS app_builder
+FROM hexpm/elixir:1.15.4-erlang-25.2.3-debian-bullseye-20230612 AS app_builder
 
 ARG env=prod
 ARG cyclonedx_cli_version=v0.24.0
+ARG NODE_MAJOR=20
 
 ENV LANG=C.UTF-8 \
    TERM=xterm \
@@ -23,8 +24,13 @@ COPY mix.lock .
 RUN mix deps.get && mix deps.compile
 
 # Let's make sure we have node
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs
+RUN apt install ca-certificates gnupg -y \
+      && mkdir -p /etc/apt/keyrings \
+      && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+      && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+      && apt-get update -y \
+      && apt-get install nodejs -y
+
 
 COPY assets ./assets
 COPY config ./config
@@ -50,8 +56,8 @@ RUN mix release
 
 FROM debian:bullseye-slim AS app
 
-ARG CLIENT_ID=:sfractal2020
-ARG MQTT_HOST="test.mosquitto.org"
+ARG CLIENT_ID=sfractal2020
+ARG MQTT_HOST="broker.emqx.io"
 ARG MQTT_PORT=1883
 ARG USER_NAME=plug
 ARG PASSWORD=fest
