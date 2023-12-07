@@ -18,7 +18,6 @@ defmodule Mqtt.Command do
     e2 = inspect(command.error_msg)
     error_msg = e1 <> " " <> e2
     Logger.debug(error_msg)
-    Tortoise.publish("sFractal/response", "oops")
     {:error, error_msg}
   end
 
@@ -31,7 +30,6 @@ defmodule Mqtt.Command do
     Logger.debug("return: ok #{inspect(command.response)}")
     response = Jason.encode(command.response)
     Logger.debug("json: #{inspect(response)}")
-    Tortoise.publish("sFractal/response", response)
     {:ok, command}
   end
 end

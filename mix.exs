@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.11.2",
+      version: "0.12.3",
       elixir: "~> 1.15.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix] ++ Mix.compilers(),
@@ -67,7 +67,8 @@ defmodule TwinklyMaha.MixProject do
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
-      {:tortoise, "<= 0.9.0"},
+      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:cowlib, "~> 2.11.0", override: true},
       {:ex_doc, "~> 0.30.4", only: :dev, runtime: false},
       {:esbuild, "~> 0.7.1", runtime: Mix.env() == :dev}
     ]
