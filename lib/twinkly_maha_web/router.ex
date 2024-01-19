@@ -20,6 +20,7 @@ defmodule TwinklyMahaWeb.Router do
     live "/", PageLive, :index
     live "/phoenix", PageLive, :index
     live "/twinkly", TwinklyLive, :twinkly
+    live "/query", QueryLive, :query
     live "/.well-known/sbom", SbomLive, :sbom
   end
 
