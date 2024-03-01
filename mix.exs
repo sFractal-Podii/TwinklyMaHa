@@ -48,7 +48,7 @@ defmodule TwinklyMaha.MixProject do
       {:jason, "~> 1.4.1"},
       {:plug_cowboy, "~> 2.6.1"},
       {:phoenix, "~> 1.6.6"},
-      {:phoenix_ecto, "~> 4.4.2"},
+      {:phoenix_ecto, "~> 4.5.0"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 0.16.4"},
       {:phoenix_html, "~> 3.3.1"},
