@@ -8,8 +8,8 @@ SBOM_FILE_NAME_CY ?= $(APP_NAME).$(APP_VERSION)-cyclonedx-sbom.1.0.0
 SBOM_FILE_NAME_SPDX ?= $(APP_NAME).$(APP_VERSION)-spdx-sbom.1.0.0
 
 GIT_REVISION ?= `git rev-parse HEAD`
-CLIENT_ID=:sfractal2020
-MQTT_HOST=35.221.11.97
+CLIENT_ID=sfractal2020
+MQTT_HOST="broker.emqx.io"
 MQTT_PORT=1883
 USER_NAME=plug
 PASSWORD=fest
