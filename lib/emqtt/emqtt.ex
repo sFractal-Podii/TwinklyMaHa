@@ -1,6 +1,7 @@
 defmodule Emqtt do
   @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
+  alias Openc2.Oc2.Command
   require Logger
 
   @clean_start false
@@ -108,8 +109,21 @@ defmodule Emqtt do
       |> Mqtt.Command.return_result()
 
     case res do
-      {:ok, command} ->
+      {:ok, %Command{action: "set"} = command} ->
         Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
+        Logger.info("handle_msg: status :ok")
+        Logger.info("handle_msg: command #{inspect(command)}")
+        Logger.info("state: #{inspect(state)}")
+
+      {:ok, %Command{action: "query"} = command} ->
+        [target_specifier] = command.target_specifier
+
+        Phoenix.PubSub.broadcast(
+          TwinklyMaha.PubSub,
+          "query",
+          {target_specifier, command.response}
+        )
+
         Logger.info("handle_msg: status :ok")
         Logger.info("handle_msg: command #{inspect(command)}")
         Logger.info("state: #{inspect(state)}")
