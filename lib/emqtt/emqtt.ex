@@ -65,6 +65,7 @@ defmodule Emqtt do
     ]
 
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
+    IO.inspect(pid, label: "============================emqtt")
 
     state = %{pid: pid, topic: topic}
 
@@ -151,3 +152,18 @@ defmodule Emqtt do
     GenServer.cast(__MODULE__, {:publish, message})
   end
 end
+
+# Pseudo:
+# - We have a MQTT client for Elixir in  place
+# - can use different broker configuration
+# 1. Start the Emqtt client when the broker option is selected
+# 2. Pass the option as argument to know which one is selected
+# 3. From the option selected fetch the environment variables for broker configuration
+# 4. Then call the publish function to publish message
+# 5. If another option is selected, shut down first then restart the client
+
+# Steps:
+
+# Create a file(mqtt_client.ex)
+# start the emqtt 
+# publish
