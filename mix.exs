@@ -46,7 +46,7 @@ defmodule TwinklyMaha.MixProject do
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 0.23.0"},
       {:jason, "~> 1.4.1"},
-      {:plug_cowboy, "~> 2.6.1"},
+      {:plug_cowboy, "~> 2.7.1"},
       {:phoenix, "~> 1.6.6"},
       {:phoenix_ecto, "~> 4.5.1"},
       {:postgrex, ">= 0.0.0"},
