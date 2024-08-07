@@ -15,8 +15,10 @@ defmodule TwinklyMaha.Application do
       {Phoenix.PubSub, name: TwinklyMaha.PubSub},
       # Start the Endpoint (http/https)
       TwinklyMahaWeb.Endpoint,
+      {DynamicSupervisor, name: EmqttSupervisor, strategy: :one_for_one}
       # start mqtt connection
-      Emqtt
+      # Emqtt
+      # HivemqServer
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

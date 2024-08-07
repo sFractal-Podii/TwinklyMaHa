@@ -6,64 +6,22 @@ defmodule Emqtt do
 
   @clean_start false
 
-  def start_link([]) do
-    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  # client
+
+  def start_link(args \\ %{broker: "emqx"}) do
+    GenServer.start_link(__MODULE__, args, name: __MODULE__)
   end
 
-  def init([]) do
+  def publish(message) do
+    GenServer.cast(__MODULE__, {:publish, message})
+  end
+
+  # server
+
+  def init(args) do
     topic = "oc2/cmd/device/t01"
 
-    clientid =
-      System.get_env("CLIENT_ID") ||
-        raise """
-        environment variable CLIENT_ID is missing.
-        For example:
-        export CLIENT_ID=sfractal2020
-        """
-
-    Logger.info("client_id is #{clientid}")
-
-    host =
-      ~c"#{System.get_env("MQTT_HOST")}" ||
-        raise """
-        environment variable HOST is missing.
-        Examples:
-        export MQTT_HOST="35.221.11.97 "
-        export MQTT_HOST="mqtt.sfractal.com"
-        """
-
-    Logger.info("mqtt_host is #{host}")
-
-    port =
-      String.to_integer(
-        System.get_env("MQTT_PORT") ||
-          raise("""
-          environment variable MQTT_PORT is missing.
-          Example:
-          export MQTT_PORT=1883
-          """)
-      )
-
-    Logger.info("mqtt_port is #{port}")
-
-    name =
-      String.to_atom(System.get_env("USER_NAME")) ||
-        raise """
-        environment variable USER_NAME is missing.
-        Examples:
-        export USER_NAME="plug"
-        """
-
-    Logger.info("user_name is #{name}")
-
-    emqtt_opts = [
-      host: host,
-      port: port,
-      clientid: clientid,
-      clean_start: @clean_start,
-      name: name
-    ]
-
+    emqtt_opts = configuration(args)
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
     IO.inspect(pid, label: "============================emqtt")
 
@@ -73,9 +31,10 @@ defmodule Emqtt do
   end
 
   def handle_continue(:start_emqtt, %{pid: pid, topic: topic} = state) do
-    {:ok, _} = :emqtt.connect(pid)
+    {:ok, _} = :emqtt.connect(pid) |> IO.inspect(label: "connecting????????????//")
 
-    {:ok, _, _} = :emqtt.subscribe(pid, {topic, 1})
+    {:ok, _, _} =
+      :emqtt.subscribe(pid, {topic, 1}) |> IO.inspect(label: "emqtt.subscribe????????????//")
 
     {:noreply, state}
   end
@@ -148,9 +107,113 @@ defmodule Emqtt do
     String.split(topic, "/", trim: true)
   end
 
-  def publish(message) do
-    GenServer.cast(__MODULE__, {:publish, message})
+  defp configuration(%{broker: "emqx"}) do
+    clientid =
+      System.get_env("CLIENT_ID") ||
+        raise """
+        environment variable CLIENT_ID is missing.
+        For example:
+        export CLIENT_ID=sfractal2020
+        """
+
+    Logger.info("client_id is #{clientid}")
+
+    host =
+      ~c"#{System.get_env("MQTT_HOST")}" ||
+        raise """
+        environment variable HOST is missing.
+        Examples:
+        export MQTT_HOST="35.221.11.97 "
+        export MQTT_HOST="mqtt.sfractal.com"
+        """
+
+    Logger.info("mqtt_host is #{host}")
+
+    port =
+      String.to_integer(
+        System.get_env("MQTT_PORT") ||
+          raise("""
+          environment variable MQTT_PORT is missing.
+          Example:
+          export MQTT_PORT=1883
+          """)
+      )
+
+    Logger.info("mqtt_port is #{port}")
+
+    name =
+      String.to_atom(System.get_env("USER_NAME")) ||
+        raise """
+        environment variable USER_NAME is missing.
+        Examples:
+        export USER_NAME="plug"
+        """
+
+    Logger.info("user_name is #{name}")
+
+    [
+      host: host,
+      port: port,
+      clientid: clientid,
+      clean_start: @clean_start,
+      name: name
+    ]
   end
+
+  defp configuration(%{broker: "hivemq"}) do
+    clientid =
+      System.get_env("HIVEMQ_CLIENT_ID") ||
+        raise """
+        environment variable HIVEMQ_CLIENT_ID is missing.
+        For example:
+        export HIVEMQ_CLIENT_ID=sfractal2020
+        """
+
+    Logger.info("client_id is #{clientid}")
+
+    host =
+      ~c"#{System.get_env("HIVEMQ_HOST")}" ||
+        raise """
+        environment variable HIVEMQ_HOST is missing.
+        Examples:
+        export HIVEMQ_HOST="35.221.11.97 "
+        export HIVEMQ_HOST="mqtt.sfractal.com"
+        """
+
+    Logger.info("mqtt_host is #{host}")
+
+    port =
+      String.to_integer(
+        System.get_env("HIVEMQ_PORT") ||
+          raise("""
+          environment variable HIVEMQ_PORT is missing.
+          Example:
+          export HIVEMQ_PORT=1883
+          """)
+      )
+
+    Logger.info("mqtt_port is #{port}")
+
+    name =
+      String.to_atom(System.get_env("HIVEMQ_USER_NAME")) ||
+        raise """
+        environment variable HIVEMQ_USER_NAME is missing.
+        Examples:
+        export HIVEMQ_USER_NAME="plug"
+        """
+
+    Logger.info("user_name is #{name}")
+
+    [
+      host: host,
+      port: port,
+      clientid: clientid,
+      clean_start: @clean_start,
+      name: name
+    ]
+  end
+
+  defp configuration(_broker), do: []
 end
 
 # Pseudo:
@@ -160,10 +223,15 @@ end
 # 2. Pass the option as argument to know which one is selected
 # 3. From the option selected fetch the environment variables for broker configuration
 # 4. Then call the publish function to publish message
-# 5. If another option is selected, shut down first then restart the client
+# 5. Do we terminate after completing the job??
 
 # Steps:
 
 # Create a file(mqtt_client.ex)
 # start the emqtt 
 # publish
+
+# TODO
+# 1. refactor if already started
+# 2. Test with openc2test
+# 3. Terminate if already started
