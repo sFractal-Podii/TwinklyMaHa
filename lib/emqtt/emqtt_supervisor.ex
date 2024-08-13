@@ -6,6 +6,7 @@ defmodule EmqttSupervisor do
   end
 
   def start_emqtt(args \\ %{broker: "emqx"}) do
+    IO.inspect(args)
     # If MyWorker is not using the new child specs, we need to pass a map:
     spec = %{id: args[:broker], start: {Emqtt, :start_link, [args]}}
 
