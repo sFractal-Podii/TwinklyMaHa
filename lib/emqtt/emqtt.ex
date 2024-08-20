@@ -51,6 +51,10 @@ defmodule Emqtt do
 
   def handle_info({:publish, publish}, state) do
     handle_publish(parse_topic(publish), publish, state)
+
+    {:ok, _Props, _ReasonCode} = :emqtt.unsubscribe(state.pid, publish, state.topic) |> IO.inspect(label: "=========!!!!")
+    {:noreply, state}
+
   end
 
   defp handle_publish(
@@ -94,13 +98,14 @@ defmodule Emqtt do
         Logger.error("state: #{inspect(state)}")
     end
 
-    {:noreply, state}
+
+
   end
 
   defp handle_publish(topic, %{payload: payload}, state) do
     Logger.info("topic != oc2/cmd/device/t01")
     Logger.info("#{Enum.join(topic, "/")} #{inspect(payload)}")
-    {:noreply, state}
+
   end
 
   defp parse_topic(%{topic: topic}) do
@@ -228,7 +233,7 @@ end
 # Steps:
 
 # Create a file(mqtt_client.ex)
-# start the emqtt 
+# start the emqtt
 # publish
 
 # TODO
