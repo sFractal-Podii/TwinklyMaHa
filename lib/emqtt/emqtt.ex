@@ -23,7 +23,6 @@ defmodule Emqtt do
 
     emqtt_opts = configuration(args)
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
-    IO.inspect(pid, label: "============================emqtt")
 
     state = %{pid: pid, topic: topic, status: "started"}
 
@@ -31,10 +30,10 @@ defmodule Emqtt do
   end
 
   def handle_continue(:start_emqtt, %{pid: pid, topic: topic} = state) do
-    {:ok, _} = :emqtt.connect(pid) |> IO.inspect(label: "connecting????????????//")
+    {:ok, _} = :emqtt.connect(pid)
 
     {:ok, _, _} =
-      :emqtt.subscribe(pid, {topic, 1}) |> IO.inspect(label: "emqtt.subscribe????????????//")
+      :emqtt.subscribe(pid, {topic, 1})
 
     {:noreply, state}
   end
@@ -53,14 +52,14 @@ defmodule Emqtt do
     handle_publish(parse_topic(publish), publish, state)
 
     {:ok, _Props, _ReasonCode} =
-      :emqtt.unsubscribe(pid, publish, state.topic) |> IO.inspect(label: "=========!!!!")
+      :emqtt.unsubscribe(pid, publish, state.topic)
 
-    :ok = :emqtt.stop(pid) |> IO.inspect(label: "]]]]]]]]]]]]]]]]]]]]stop")
+    :ok = :emqtt.stop(pid)
 
     {:stop, :normal, state}
   end
 
-  def terminate(reason, state) do
+  def terminate(reason, _state) do
     Logger.info("Emqtt process stopped #{inspect(reason)}")
   end
 
