@@ -25,7 +25,7 @@ defmodule Emqtt do
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
     IO.inspect(pid, label: "============================emqtt")
 
-    state = %{pid: pid, topic: topic}
+    state = %{pid: pid, topic: topic, status: "started"}
 
     {:ok, state, {:continue, :start_emqtt}}
   end
@@ -49,12 +49,19 @@ defmodule Emqtt do
     {:noreply, state}
   end
 
-  def handle_info({:publish, publish}, state) do
+  def handle_info({:publish, publish}, %{pid: pid} = state) do
     handle_publish(parse_topic(publish), publish, state)
 
-    {:ok, _Props, _ReasonCode} = :emqtt.unsubscribe(state.pid, publish, state.topic) |> IO.inspect(label: "=========!!!!")
-    {:noreply, state}
+    {:ok, _Props, _ReasonCode} =
+      :emqtt.unsubscribe(pid, publish, state.topic) |> IO.inspect(label: "=========!!!!")
 
+    :ok = :emqtt.stop(pid) |> IO.inspect(label: "]]]]]]]]]]]]]]]]]]]]stop")
+
+    {:stop, :normal, state}
+  end
+
+  def terminate(reason, state) do
+    Logger.info("Emqtt process stopped #{inspect(reason)}")
   end
 
   defp handle_publish(
@@ -97,22 +104,18 @@ defmodule Emqtt do
         Logger.error("handle_msg: #{inspect(msg)}")
         Logger.error("state: #{inspect(state)}")
     end
-
-
-
   end
 
-  defp handle_publish(topic, %{payload: payload}, state) do
+  defp handle_publish(topic, %{payload: payload}, _state) do
     Logger.info("topic != oc2/cmd/device/t01")
     Logger.info("#{Enum.join(topic, "/")} #{inspect(payload)}")
-
   end
 
   defp parse_topic(%{topic: topic}) do
     String.split(topic, "/", trim: true)
   end
 
-  defp configuration(%{broker: "emqx"}) do
+  def configuration(%{broker: "emqx"}) do
     clientid =
       System.get_env("CLIENT_ID") ||
         raise """
@@ -165,7 +168,7 @@ defmodule Emqtt do
     ]
   end
 
-  defp configuration(%{broker: "hivemq"}) do
+  def configuration(%{broker: "hivemq"}) do
     clientid =
       System.get_env("HIVEMQ_CLIENT_ID") ||
         raise """
@@ -218,7 +221,7 @@ defmodule Emqtt do
     ]
   end
 
-  defp configuration(_broker), do: []
+  def configuration(_broker), do: []
 end
 
 # Pseudo:
