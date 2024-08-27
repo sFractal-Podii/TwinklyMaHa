@@ -24,11 +24,16 @@ defmodule Emqtt do
     emqtt_opts = configuration(args)
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
 
-    state = %{pid: pid, topic: topic, status: "started"}
+    state = %{pid: pid, topic: topic}
 
     {:ok, state, {:continue, :start_emqtt}}
   end
 
+  @spec handle_continue(:start_emqtt, %{
+          :pid => atom() | pid(),
+          :topic => binary(),
+          optional(any()) => any()
+        }) :: {:noreply, %{:pid => atom() | pid(), :topic => binary(), optional(any()) => any()}}
   def handle_continue(:start_emqtt, %{pid: pid, topic: topic} = state) do
     {:ok, _} = :emqtt.connect(pid)
 

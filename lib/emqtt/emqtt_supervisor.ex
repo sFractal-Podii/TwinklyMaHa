@@ -13,6 +13,15 @@ defmodule EmqttSupervisor do
   end
 
   @impl true
+  @spec init(any()) ::
+          {:ok,
+           %{
+             extra_arguments: list(),
+             intensity: non_neg_integer(),
+             max_children: :infinity | non_neg_integer(),
+             period: pos_integer(),
+             strategy: :one_for_one
+           }}
   def init(init_arg) do
     DynamicSupervisor.init(
       strategy: :one_for_one,
