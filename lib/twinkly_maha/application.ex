@@ -16,7 +16,8 @@ defmodule TwinklyMaha.Application do
       # Start the Endpoint (http/https)
       TwinklyMahaWeb.Endpoint,
       # start mqtt connection
-      Emqtt
+      Emqtt.Emqx,
+      Emqtt.Hivemq
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
