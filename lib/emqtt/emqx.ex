@@ -1,4 +1,4 @@
-defmodule Emqtt do
+defmodule Emqtt.Emqx do
   @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
   alias Openc2.Oc2.Command
