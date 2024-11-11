@@ -12,13 +12,12 @@ on:
 
 jobs:
   lint:
-
     name: Run test and check code styles
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        elixir: ['1.15.4']
-        otp: ['25.2.3']
+        elixir: ["1.17.3"]
+        otp: ["27.1"]
     services:
       db:
         env:
@@ -26,7 +25,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
         image: postgres:11
-        ports: ['5432:5432']
+        ports: ["5432:5432"]
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -34,28 +33,28 @@ jobs:
           --health-retries 5
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Elixir
-      uses: erlef/setup-beam@v1
-      with:
+      - uses: actions/checkout@v2
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
           version-type: loose
           elixir-version: ${{ matrix.elixir }}
           otp-version: ${{ matrix.otp }}
-    - name: Restore dependencies cache
-      uses: actions/cache@v3
-      with:
-        path: deps
-        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-        restore-keys: ${{ runner.os }}-mix-
-    - name: Install dependencies
-      run: mix deps.get
-    - name: Run tests
-      run: mix test
-      env:
-        CLIENT_ID: sfractal2020
-        MQTT_HOST: mqtt.sfractal.com
-        MQTT_PORT: 1883
-        USER_NAME: plug
-        PASSWORD: fest
-    - name: Check lints
-      run: make lint
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: deps
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+      - name: Install dependencies
+        run: mix deps.get
+      - name: Run tests
+        run: mix test
+        env:
+          CLIENT_ID: sfractal2020
+          MQTT_HOST: mqtt.sfractal.com
+          MQTT_PORT: 1883
+          USER_NAME: plug
+          PASSWORD: fest
+      - name: Check lints
+        run: make lint
