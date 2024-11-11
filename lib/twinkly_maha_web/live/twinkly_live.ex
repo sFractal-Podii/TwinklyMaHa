@@ -17,16 +17,16 @@ defmodule TwinklyMahaWeb.TwinklyLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
+    ~H"""
     <div class="row">
     <div class="column column-50 column-offset-25">
         <%= for row <- 0..7 do %>
-          <%= for _column <- 0..7 do %>
+          <%= for column <- 0..7 do %>
             <div class="led-box">
-            <div class="led led-<%= if @led_on?, do: "on", else: "off" %>" <%= assign_color(assigns, @current_color, row) %> phx-hook="LedColor" id="#{row}"></div>
+            <div class={["led",  @led_on? && "led-on",  !@led_on? && "led-off"]} data-ledcolor={assign_color(assigns, @current_color, row)} phx-hook="LedColor" id={"row-#{row}-col-#{column}"}></div>
             </div>
           <% end %>
-            <br/ >
+            <br>
         <% end %>
         <%= if @led_on?, do: select_color(assigns) %>
         <div>
@@ -38,30 +38,32 @@ defmodule TwinklyMahaWeb.TwinklyLive do
   end
 
   defp assign_color(assigns, "rainbow", row) do
-    ~L"""
-    data-ledcolor="<%= Stream.cycle(@colors) |> Enum.at(row) %>"
+    assigns = assign(assigns, row: row)
+
+    ~H"""
+    <%= Stream.cycle(@colors) |> Enum.at(@row) %>
     """
   end
 
-  defp assign_color(assigns, color, _row) do
-    ~L"""
-    data-ledcolor="<%= color %>"
+  defp assign_color(assigns, _color, _row) do
+    ~H"""
+    <%= @current_color %> 
     """
   end
 
   defp select_color(assigns) do
     # this is assigned here to stop it from updating the select list when colors is shifted to the right
-    colors = @colors
+    assigns = assign(assigns, select_colors: @colors)
 
-    ~L"""
+    ~H"""
     <form phx-change="change-color">
       <select id="select-colors" name="color">
-      <%= for color <- colors do %>
-          <option value="<%= color %>" <%= if @current_color == color, do: "selected" %> >
+      <%= for color <- @select_colors do %>
+          <option value={color} selected={if @current_color == color, do: "selected"}>
             <%= color %>
           </option>
         <% end %>
-      <option value="rainbow" <%= if @current_color == "rainbow", do: "selected" %> >
+      <option value="rainbow" selected={ @current_color == "rainbow"}>
         Rainbow
       </option>
     </select>

@@ -14,7 +14,7 @@ defmodule TwinklyMahaWeb.QueryLive do
 
   @impl true
   def render(assigns) do
-    ~L"""
+    ~H"""
     <div>
       <pre><%= Jason.encode!(@query_response, pretty: true) %></pre>
     </div>

@@ -22,7 +22,7 @@ defmodule TwinklyMahaWeb do
       use Phoenix.Controller, namespace: TwinklyMahaWeb
 
       import Plug.Conn
-      import TwinklyMahaWeb.Gettext
+      use Gettext, backend: TwinklyMahaWeb.Gettext
       alias TwinklyMahaWeb.Router.Helpers, as: Routes
     end
   end
@@ -45,7 +45,7 @@ defmodule TwinklyMahaWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {TwinklyMahaWeb.LayoutView, "live.html"}
+        layout: {TwinklyMahaWeb.Layouts, :app}
 
       unquote(view_helpers())
     end
@@ -72,23 +72,36 @@ defmodule TwinklyMahaWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import TwinklyMahaWeb.Gettext
+      use Gettext, backend: TwinklyMahaWeb.Gettext
+    end
+  end
+
+  def html do
+    quote do
+      use Phoenix.Component
+
+      # Import convenience functions from controllers
+      import Phoenix.Controller,
+        only: [get_csrf_token: 0, view_module: 1, view_template: 1]
+
+      # Include general helpers for rendering HTML
+      unquote(view_helpers())
     end
   end
 
   defp view_helpers do
     quote do
-      # Use all HTML functionality (forms, tags, etc)
-      use Phoenix.HTML
+      import Phoenix.HTML
+      import Phoenix.HTML.Form
+      use PhoenixHTMLHelpers
+      use Gettext, backend: TwinklyMahaWeb.Gettext
 
-      # Import LiveView helpers (live_render, live_component, live_patch, etc)
-      import Phoenix.LiveView.Helpers
-
+      import Phoenix.Component
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
       import TwinklyMahaWeb.ErrorHelpers
-      import TwinklyMahaWeb.Gettext
+      import TwinklyMahaWeb.CoreComponents
       alias TwinklyMahaWeb.Router.Helpers, as: Routes
     end
   end
