@@ -56,5 +56,8 @@ jobs:
           MQTT_PORT: 1883
           USER_NAME: plug
           PASSWORD: fest
+          HIVEMQ_CLIENT_ID: sfractal2020
+          HIVEMQ_PORT: 1883
+          HIVEMQ_USER_NAME: plug
       - name: Check lints
         run: make lint
