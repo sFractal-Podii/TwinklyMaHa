@@ -5,9 +5,9 @@ defmodule TwinklyMaha.MixProject do
     [
       app: :twinkly_maha,
       version: "0.13.6",
-      elixir: "~> 1.15.4",
+      elixir: "~> 1.17.0",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix] ++ Mix.compilers(),
+      compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -40,22 +40,22 @@ defmodule TwinklyMaha.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
-      {:ecto, ">= 3.7.1"},
-      {:ecto_sql, "~> 3.9.0"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:ecto, ">= 3.12.0"},
+      {:ecto_sql, "~> 3.12"},
       {:floki, ">= 0.0.0", only: :test},
-      {:gettext, "~> 0.23.0"},
-      {:jason, "~> 1.4.1"},
-      {:plug_cowboy, "~> 2.6.1"},
-      {:phoenix, "~> 1.6.6"},
-      {:phoenix_ecto, "~> 4.5.1"},
+      {:gettext, "~> 0.26"},
+      {:jason, "~> 1.4"},
+      {:plug_cowboy, "~> 2.7"},
+      {:phoenix, "~> 1.7"},
+      {:phoenix_ecto, "~> 4.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.16.4"},
-      {:phoenix_html, "~> 3.3.1"},
-      {:phoenix_live_reload, "~> 1.4.1", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.5"},
-      {:telemetry_metrics, "~> 0.6"},
-      {:telemetry_poller, "~> 0.5.1"},
+      {:phoenix_live_view, "~> 0.20"},
+      {:phoenix_html, "~> 4.1.1"},
+      {:phoenix_live_reload, "~> 1.5.3", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.8"},
+      {:telemetry_metrics, "~> 1.0.0"},
+      {:telemetry_poller, "~> 1.1.0"},
       {
         :sbom,
         only: :dev,
@@ -67,10 +67,12 @@ defmodule TwinklyMaha.MixProject do
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
-      {:emqtt, github: "emqx/emqtt", tag: "1.4.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
+      {:emqtt, github: "emqx/emqtt", tag: "1.13.3", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
       {:esbuild, "~> 0.8.1", runtime: Mix.env() == :dev},
       {:cowlib, "~> 2.13.0", override: true},
-      {:ex_doc, "~> 0.34.2", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.34.2", only: :dev, runtime: false},
+      {:phoenix_html_helpers, "~> 1.0"},
+      {:phoenix_view, "~> 2.0"}
     ]
   end
 

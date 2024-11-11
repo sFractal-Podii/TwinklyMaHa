@@ -18,9 +18,11 @@ defmodule TwinklyMahaWeb.SbomLive do
         Map.put(acc, filter, filter_files(files, filter))
       end)
 
+    assigns = assign(assigns, sbom_files: sbom_files)
+
     ~H"""
     <p>SBOMs for this site are available in several formats and serializations. </p>
-    <%= for {k, v} <- sbom_files do %>
+    <%= for {k, v} <- @sbom_files do %>
       <ol> <%= k %> </ol>
       <%= for file <- v do %>
           <li> <%= link file,  to: ["sbom/",file] %> </li>
