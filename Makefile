@@ -125,6 +125,11 @@ push-image-gcp: ## push image to gcp
 	--build-arg MQTT_PORT=$(MQTT_PORT) \
 	--build-arg USER_NAME=$(USER_NAME) \
 	--build-arg PASSWORD=$(PASSWORD) \
+	--build-arg HIVEMQ_CLIENT_ID=$(HIVEMQ_CLIENT_ID) \
+	--build-arg HIVEMQ_HOST=$(HIVEMQ_HOST) \
+	--build-arg HIVEMQ_PORT=$(HIVEMQ_PORT) \
+	--build-arg HIVEMQ_USER_NAME=$(HIVEMQ_USER_NAME) \
+	--build-arg HIVEMQ_PASSWORD=$(HIVEMQ_PASSWORD) 
 
 	gcloud container images delete $(IMAGE_URL):$(APP_VERSION) --force-delete-tags  || echo "no image to delete on the remote"
 	docker push $(IMAGE_URL):$(APP_VERSION)
@@ -140,7 +145,12 @@ deploy-existing-image:
 		--metadata=google-logging-enabled=true \
 		--tags=http-server,https-server \
 		--labels=project=twinklymaha \
-		--container-env=CLIENT_ID=$(CLIENT_ID),MQTT_HOST=$(MQTT_HOST),MQTT_PORT=$(MQTT_PORT),USER_NAME=$(USER_NAME),PASSWORD=$(PASSWORD)
+		--container-env=CLIENT_ID=$(CLIENT_ID),MQTT_HOST=$(MQTT_HOST),MQTT_PORT=$(MQTT_PORT),USER_NAME=$(USER_NAME),PASSWORD=$(PASSWORD) \
+			,HIVEMQ_CLIENT_ID=$(HIVEMQ_CLIENT_ID) \
+			,HIVEMQ_HOST=$(HIVEMQ_HOST) \
+			,HIVEMQ_PORT=$(HIVEMQ_PORT) \
+			,HIVEMQ_USER_NAME=$(HIVEMQ_USER_NAME) \
+			,HIVEMQ_PASSWORD=$(HIVEMQ_PASSWORD) 
 
 .PHONY: update-instance
 update-instance:
