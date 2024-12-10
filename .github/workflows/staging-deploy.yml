@@ -17,7 +17,8 @@ name: Staging Deploy
 on:
   push:
     branches:
-    - develop
+      - develop
+      - fix-docker
 
 env:
   PROJECT_ID: ${{ secrets.GCE_PROJECT }}
@@ -34,40 +35,40 @@ jobs:
     #  GCE_INSTANCE_ZONE: us-east4-c
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-    # Setup gcloud CLI
-    - run: |
-        sudo apt-get install python2.7
-        export CLOUDSDK_PYTHON="/usr/bin/python2"
+      # Setup gcloud CLI
+      - run: |
+          sudo apt-get install python2.7
+          export CLOUDSDK_PYTHON="/usr/bin/python2"
 
-    - uses: google-github-actions/setup-gcloud@v0
-      with:
-        version: '290.0.1'
-        service_account_key: ${{ secrets.GCE_SA_KEY }}
-        project_id: ${{ secrets.GCE_PROJECT }}
+      - uses: google-github-actions/setup-gcloud@v0
+        with:
+          version: "290.0.1"
+          service_account_key: ${{ secrets.GCE_SA_KEY }}
+          project_id: ${{ secrets.GCE_PROJECT }}
 
-    # Configure Docker to use the gcloud command-line tool as a credential
-    # helper for authentication
-    - run: |-
-        gcloud --quiet auth configure-docker
+      # Configure Docker to use the gcloud command-line tool as a credential
+      # helper for authentication
+      - run: |-
+          gcloud --quiet auth configure-docker
 
-    # Build the Docker image
-    - name: Build
-      run: |
-        echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
-        docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
+      # Build the Docker image
+      - name: Build
+        run: |
+          echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
+          docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
 
-    # Push the Docker image to Google Container Registry
-    - name: Publish
-      run: |-
-        docker push "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |-
+          docker push "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
 
-    - name: Deploy to Cloud Run
-      id: deploy
-      uses: google-github-actions/deploy-cloudrun@v0
-      with: 
-        service: twinklymaha-staging 
-        region: us-east4
-        image: "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0
+        with:
+          service: twinklymaha-staging
+          region: us-east4
+          image: "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
