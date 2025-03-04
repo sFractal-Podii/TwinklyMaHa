@@ -58,6 +58,6 @@ jobs:
           PASSWORD: fest
           HIVEMQ_CLIENT_ID: sfractal2020
           HIVEMQ_PORT: 1883
-          HIVEMQ_USER_NAME: plug
+          HIVEMQ_USER_NAME: hive_plug
       - name: Check lints
         run: make lint

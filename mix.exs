@@ -56,13 +56,11 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.0.0"},
       {:telemetry_poller, "~> 1.1.0"},
-      {
-        :sbom,
-        only: :dev,
-        git: "https://github.com/sigu/sbom.git",
-        branch: "auto-install-bom",
-        runtime: false
-      },
+      {:sbom,
+       only: :dev,
+       git: "https://github.com/sigu/sbom.git",
+       branch: "auto-install-bom",
+       runtime: false},
       {
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
