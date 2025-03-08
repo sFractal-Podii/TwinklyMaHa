@@ -1,6 +1,6 @@
 on:
   release:
-    types: 
+    types:
       - published
 
 name: Upload Release Asset
@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        elixir: ['1.15.4']
-        otp: ['25.3.2.2']
+        elixir: ["1.15.4"]
+        otp: ["25.3.2.2"]
     steps:
       - uses: actions/checkout@v2
       - name: Set up Elixir
@@ -35,10 +35,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Build project
         run: |
-           mix deps.get && mix deps.compile
-           mix sbom.install
-           mix sbom.cyclonedx
-           mix sbom.convert
+          mix deps.get && mix deps.compile
+          mix sbom.install
+          mix sbom.cyclonedx
+          mix sbom.convert
       - name: Upload SBOM Json
         uses: actions/upload-release-asset@v1
         env:

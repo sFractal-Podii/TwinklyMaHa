@@ -27,14 +27,4 @@ defmodule TwinklyMahaWeb.ChannelCase do
       @endpoint TwinklyMahaWeb.Endpoint
     end
   end
-
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TwinklyMaha.Repo)
-
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(TwinklyMaha.Repo, {:shared, self()})
-    end
-
-    :ok
-  end
 end
