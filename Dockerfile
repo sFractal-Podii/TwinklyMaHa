@@ -1,13 +1,13 @@
 # heavily borrowed from https://elixirforum.com/t/cannot-find-libtinfo-so-6-when-launching-elixir-app/24101/11?u=sigu
-FROM hexpm/elixir:1.15.4-erlang-25.2.3-debian-bullseye-20230612 AS app_builder
+FROM hexpm/elixir:1.17.3-erlang-27.0.1-debian-bullseye-20241202 AS app_builder
 
 ARG env=prod
 ARG cyclonedx_cli_version=v0.24.0
 ARG NODE_MAJOR=20
 
 ENV LANG=C.UTF-8 \
-   TERM=xterm \
-   MIX_ENV=$env
+      TERM=xterm \
+      MIX_ENV=$env
 
 RUN mkdir /opt/release
 WORKDIR /opt/release
@@ -61,6 +61,11 @@ ARG MQTT_HOST="broker.emqx.io"
 ARG MQTT_PORT=1883
 ARG USER_NAME=plug
 ARG PASSWORD=fest
+ARG HIVEMQ_CLIENT_ID=hivemqclient
+ARG HIVEMQ_HOST="broker.hivemq.com"
+ARG HIVEMQ_PORT=1883
+ARG HIVEMQ_USER_NAME=plug_hivemq
+ARG HIVEMQ_PASSWORD=fest
 
 
 ENV LANG=C.UTF-8
@@ -69,6 +74,11 @@ ENV MQTT_HOST=$MQTT_HOST
 ENV MQTT_PORT=$MQTT_PORT
 ENV USER_NAME=$USER_NAME
 ENV PASSWORD=$PASSWORD
+ENV HIVEMQ_CLIENT_ID=$HIVEMQ_CLIENT_ID
+ENV HIVEMQ_HOST=$HIVEMQ_HOST
+ENV HIVEMQ_PORT=$HIVEMQ_PORT
+ENV HIVEMQ_USER_NAME=$HIVEMQ_USER_NAME
+ENV HIVEMQ_PASSWORD=$HIVEMQ_PASSWORD
 
 RUN apt-get update && apt-get install -y openssl
 

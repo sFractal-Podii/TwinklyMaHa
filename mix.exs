@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.13.6",
+      version: "0.13.6-dev",
       elixir: "~> 1.17.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
@@ -56,13 +56,11 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_live_dashboard, "~> 0.8"},
       {:telemetry_metrics, "~> 1.0.0"},
       {:telemetry_poller, "~> 1.1.0"},
-      {
-        :sbom,
-        only: :dev,
-        git: "https://github.com/sigu/sbom.git",
-        branch: "auto-install-bom",
-        runtime: false
-      },
+      {:sbom,
+       only: :dev,
+       git: "https://github.com/sigu/sbom.git",
+       branch: "auto-install-bom",
+       runtime: false},
       {
         :openc2,
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
@@ -84,10 +82,7 @@ defmodule TwinklyMaha.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      setup: ["deps.get", "cmd npm install --prefix assets"],
       "assets.deploy": ["esbuild default --minify", "phx.digest"]
     ]
   end
