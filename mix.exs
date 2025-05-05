@@ -66,7 +66,7 @@ defmodule TwinklyMaha.MixProject do
         git: "https://github.com/sFractal-Podii/openc2.git", branch: "main"
       },
       {:emqtt, github: "emqx/emqtt", tag: "1.14.4", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
-      {:esbuild, "~> 0.8.1", runtime: Mix.env() == :dev},
+      {:esbuild, "~> 0.9.0", runtime: Mix.env() == :dev},
       {:cowlib, "~> 2.13.0", override: true},
       {:ex_doc, "~> 0.37.2", only: :dev, runtime: false},
       {:phoenix_html_helpers, "~> 1.0"},
