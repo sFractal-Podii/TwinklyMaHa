@@ -1,10 +1,9 @@
 defmodule Emqtt.Hivemq do
   @moduledoc "Emqtt server responsible for handling pubsub between clients and broker"
   use GenServer
-  alias Openc2.Oc2.Command
   require Logger
 
-  @clean_start false
+  alias TwinklyMaha.Oc2
 
   def start_link([]) do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
@@ -13,79 +12,25 @@ defmodule Emqtt.Hivemq do
   def init([]) do
     topic = "oc2/cmd/device/t02"
 
-    clientid =
-      System.get_env("HIVEMQ_CLIENT_ID") ||
-        raise """
-        environment variable HIVEMQ_CLIENT_ID is missing.
-        For example:
-        export HIVEMQ_CLIENT_ID=sfractal2020
-        """
-
-    Logger.info("client_id is #{clientid}")
-
-    host =
-      ~c"#{System.get_env("HIVEMQ_HOST")}" ||
-        raise """
-        environment variable HIVEMQ_HOST is missing.
-        Examples:
-        export HIVEMQ_HOST="35.221.11.97 "
-        export HIVEMQ_HOST="mqtt.sfractal.com"
-        """
-
-    Logger.info("mqtt_host is #{host}")
-
-    port =
-      String.to_integer(
-        System.get_env("HIVEMQ_PORT") ||
-          raise("""
-          environment variable HIVEMQ_PORT is missing.
-          Example:
-          export HIVEMQ_PORT=1883
-          """)
-      )
-
-    Logger.info("mqtt_port is #{port}")
-
-    name =
-      String.to_atom(System.get_env("HIVEMQ_USER_NAME")) ||
-        raise """
-        environment variable HIVEMQ_USER_NAME is missing.
-        Examples:
-        export HIVEMQ_USER_NAME="plug"
-        """
-
-    Logger.info("user_name is #{name}")
-
-    emqtt_opts = [
-      host: host,
-      port: port,
-      clientid: clientid,
-      clean_start: @clean_start,
-      name: name
-    ]
+    emqtt_opts = Application.get_env(:twinkly_maha, Emqtt.Hivemq)
+    Logger.info("Starting #{__MODULE__} with opts: #{inspect(emqtt_opts)}")
 
     {:ok, pid} = :emqtt.start_link(emqtt_opts)
 
-    state = %{pid: pid, topic: topic}
-
-    {:ok, state, {:continue, :start_emqtt}}
+    {:ok, %{pid: pid, topic: topic}, {:continue, :start_emqtt}}
   end
 
   def handle_continue(:start_emqtt, %{pid: pid, topic: topic} = state) do
     {:ok, _} = :emqtt.connect(pid)
 
     {:ok, _, _} = :emqtt.subscribe(pid, {topic, 1})
+    Logger.info(%{event: :subscribed, topic: topic})
 
     {:noreply, state}
   end
 
   def handle_cast({:publish, message}, %{topic: topic, pid: pid} = state) do
-    :emqtt.publish(
-      pid,
-      topic,
-      message
-    )
-
+    :emqtt.publish(pid, topic, message)
     {:noreply, state}
   end
 
@@ -94,45 +39,17 @@ defmodule Emqtt.Hivemq do
   end
 
   defp handle_publish(
-         ["oc2", "cmd", "device", "t02"] = _topic,
+         ["oc2", "cmd", "device", "t02"] = topic,
          %{payload: payload},
          state
        ) do
-    Logger.info("topic: oc2/cmd/device/t02")
-    Logger.info("msg: #{inspect(payload)}")
-    # handle the message , turn led on and off
+    Logger.info(%{
+      topic: Enum.join(topic, "/"),
+      message: payload,
+      state: state
+    })
 
-    res =
-      payload
-      |> Openc2.Oc2.Command.new()
-      |> Openc2.Oc2.Command.do_cmd()
-      |> Mqtt.Command.return_result()
-
-    case res do
-      {:ok, %Command{action: "set"} = command} ->
-        Phoenix.PubSub.broadcast(TwinklyMaha.PubSub, "leds", command.target_specifier)
-        Logger.info("handle_msg: status :ok")
-        Logger.info("handle_msg: command #{inspect(command)}")
-        Logger.info("state: #{inspect(state)}")
-
-      {:ok, %Command{action: "query"} = command} ->
-        [target_specifier] = command.target_specifier
-
-        Phoenix.PubSub.broadcast(
-          TwinklyMaha.PubSub,
-          "query",
-          {target_specifier, command.response}
-        )
-
-        Logger.info("handle_msg: status :ok")
-        Logger.info("handle_msg: command #{inspect(command)}")
-        Logger.info("state: #{inspect(state)}")
-
-      {:error, msg} ->
-        Logger.error("handle_msg: status :error")
-        Logger.error("handle_msg: #{inspect(msg)}")
-        Logger.error("state: #{inspect(state)}")
-    end
+    Oc2.handle_payload(payload)
 
     {:noreply, state}
   end
