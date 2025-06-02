@@ -10,7 +10,8 @@ defmodule Emqtt.Hivemq do
   end
 
   def init([]) do
-    topic = "oc2/cmd/device/t02"
+    deploy_env = Application.get_env(:twinkly_maha, :deploy_env)
+    topic = "oc2/cmd/device/t02/#{deploy_env}"
 
     emqtt_opts = Application.get_env(:twinkly_maha, Emqtt.Hivemq)
     Logger.info("Starting #{__MODULE__} with opts: #{inspect(emqtt_opts)}")
@@ -39,7 +40,7 @@ defmodule Emqtt.Hivemq do
   end
 
   defp handle_publish(
-         ["oc2", "cmd", "device", "t02"] = topic,
+         ["oc2", "cmd", "device", "t02", _deploy_env] = topic,
          %{payload: payload},
          state
        ) do

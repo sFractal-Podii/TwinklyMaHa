@@ -58,7 +58,8 @@ jobs:
     - name: Build
       run: |
         echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
-        docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:${GITHUB_REF_NAME}" .
+        docker build --build-arg DEPLOY_ENV=prod --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:${GITHUB_REF_NAME}" .
+
 
     # Push the Docker image to Google Container Registry
     - name: Publish

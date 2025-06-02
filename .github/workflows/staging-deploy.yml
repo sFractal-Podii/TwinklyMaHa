@@ -53,7 +53,7 @@ jobs:
       - name: Build
         run: |
           echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
-          docker build --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
+          docker build --build-arg DEPLOY_ENV=staging --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
 
       # Push the Docker image to Google Container Registry
       - name: Publish
