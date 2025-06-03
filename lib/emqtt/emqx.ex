@@ -10,8 +10,8 @@ defmodule Emqtt.Emqx do
   end
 
   def init([]) do
-    topic = "oc2/cmd/device/t01"
-
+    deploy_env = Application.get_env(:twinkly_maha, :deploy_env)
+    topic = "oc2/cmd/device/t01/#{deploy_env}"
     emqtt_opts = Application.get_env(:twinkly_maha, Emqtt.Emqx)
 
     Logger.info("Starting #{__MODULE__} with options: #{inspect(emqtt_opts)}")
@@ -42,7 +42,7 @@ defmodule Emqtt.Emqx do
   end
 
   defp handle_publish(
-         ["oc2", "cmd", "device", "t01"] = topic,
+         ["oc2", "cmd", "device", "t01", _deploy_env] = topic,
          %{payload: payload},
          state
        ) do
