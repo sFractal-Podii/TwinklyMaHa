@@ -4,7 +4,7 @@ defmodule TwinklyMaha.MixProject do
   def project do
     [
       app: :twinkly_maha,
-      version: "0.13.7-alpha",
+      version: "0.13.7",
       elixir: "~> 1.17.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
