@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%= csrf_meta_tag() %>
+    {csrf_meta_tag()}
     <.live_title suffix=" - TwinklyMaha">
-      <%= assigns[:page_title] || "TwinklyMaha" %>
+      {assigns[:page_title] || "TwinklyMaha"}
     </.live_title>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")} />
     <script
@@ -23,7 +23,7 @@
         <nav role="navigation">
           <ul>
             <li>TwinklyMaha</li>
-            <h3>Version <%= TwinklyMaha.Meta.version() %></h3>
+            <h3>Version {TwinklyMaha.Meta.version()}</h3>
           </ul>
         </nav>
         <a href="/" class="logo">
@@ -31,6 +31,6 @@
         </a>
       </section>
     </header>
-    <%= @inner_content %>
+    {@inner_content}
   </body>
 </html>

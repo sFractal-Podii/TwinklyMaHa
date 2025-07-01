@@ -34,10 +34,10 @@ defmodule TwinklyMahaWeb.TwinklyLive do
           <% end %>
           <br />
         <% end %>
-        <%= if @led_on?, do: select_color(assigns) %>
+        {if @led_on?, do: select_color(assigns)}
         <div>
           <a class="button" phx-click="toggle-led">
-            Turn LED <%= if @led_on?, do: "OFF", else: "ON" %>
+            Turn LED {if @led_on?, do: "OFF", else: "ON"}
           </a>
         </div>
       </div>
@@ -49,13 +49,13 @@ defmodule TwinklyMahaWeb.TwinklyLive do
     assigns = assign(assigns, row: row)
 
     ~H"""
-    <%= Stream.cycle(@colors) |> Enum.at(@row) %>
+    {Stream.cycle(@colors) |> Enum.at(@row)}
     """
   end
 
   defp assign_color(assigns, _color, _row) do
     ~H"""
-    <%= @current_color %>
+    {@current_color}
     """
   end
 
@@ -68,7 +68,7 @@ defmodule TwinklyMahaWeb.TwinklyLive do
       <select id="select-colors" name="color">
         <%= for color <- @select_colors do %>
           <option value={color} selected={if @current_color == color, do: "selected"}>
-            <%= color %>
+            {color}
           </option>
         <% end %>
         <option value="rainbow" selected={@current_color == "rainbow"}>
