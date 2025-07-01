@@ -14,6 +14,16 @@ jobs:
   lint:
     name: Run test and check code styles
     runs-on: ubuntu-24.04
+    env:
+      CLIENT_ID: sfractal2020
+      MQTT_HOST: mqtt.sfractal.com
+      MQTT_PORT: 1883
+      USER_NAME: plug
+      PASSWORD: fest
+      HIVEMQ_CLIENT_ID: sfractal2020
+      HIVEMQ_HOST: hivemq.sfractal.com
+      HIVEMQ_PORT: 1883
+      HIVEMQ_USER_NAME: hive_plug
     steps:
       - uses: actions/checkout@v4
       - name: Set up Elixir
@@ -33,13 +43,3 @@ jobs:
         run: make lint
       - name: Run tests
         run: mix test
-        env:
-          CLIENT_ID: sfractal2020
-          MQTT_HOST: mqtt.sfractal.com
-          MQTT_PORT: 1883
-          USER_NAME: plug
-          PASSWORD: fest
-          HIVEMQ_CLIENT_ID: sfractal2020
-          HIVEMQ_HOST: hivemq.sfractal.com
-          HIVEMQ_PORT: 1883
-          HIVEMQ_USER_NAME: hive_plug
