@@ -10,6 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      CLIENT_ID: sfractal2020
+      MQTT_HOST: mqtt.sfractal.com
+      MQTT_PORT: 1883
+      USER_NAME: plug
+      PASSWORD: fest
+      HIVEMQ_CLIENT_ID: sfractal2020
+      HIVEMQ_HOST: hivemq.sfractal.com
+      HIVEMQ_PORT: 1883
+      HIVEMQ_USER_NAME: hive_plug
 
     steps:
       - name: Checkout
