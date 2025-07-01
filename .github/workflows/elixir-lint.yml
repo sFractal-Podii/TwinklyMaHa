@@ -24,6 +24,7 @@ jobs:
       HIVEMQ_HOST: hivemq.sfractal.com
       HIVEMQ_PORT: 1883
       HIVEMQ_USER_NAME: hive_plug
+      MIX_ENV: test
     steps:
       - uses: actions/checkout@v4
       - name: Set up Elixir
