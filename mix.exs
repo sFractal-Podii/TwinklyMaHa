@@ -50,7 +50,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix, "~> 1.7"},
       {:phoenix_ecto, "~> 4.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_live_view, "~> 0.20"},
+      {:phoenix_live_view, "~> 1.0"},
       {:phoenix_html, "~> 4.1.1"},
       {:phoenix_live_reload, "~> 1.5.3", only: :dev},
       {:phoenix_live_dashboard, "~> 0.8"},
