@@ -40,8 +40,7 @@ defmodule TwinklyMahaWeb.CoreComponents do
         <%= @title %>
       </p>
       <p class="mt-2 text-sm leading-5"><%= msg %></p>
-      <button type="button" class="group absolute top-1 right-1 p-2" aria-label="close">
-      </button>
+      <button type="button" class="group absolute top-1 right-1 p-2" aria-label="close"></button>
     </div>
     """
   end
@@ -69,7 +68,7 @@ defmodule TwinklyMahaWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        Attempting to reconnect 
+        Attempting to reconnect
       </.flash>
 
       <.flash

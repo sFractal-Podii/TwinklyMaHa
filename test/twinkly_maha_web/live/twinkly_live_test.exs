@@ -22,10 +22,10 @@ defmodule TwinklyMahaWeb.TwinklyLiveTest do
 
   test "toggle words on the button", %{conn: conn} do
     {:ok, view, _disconnected_html} = live(conn, "/twinkly")
-    assert render(view) =~ "Turn LED ON </a>"
+    assert render(view) =~ "Turn LED ON\n"
     content = view |> element(".button") |> render_click()
-    assert content =~ "Turn LED OFF </a>"
+    assert content =~ "Turn LED OFF\n"
     content = view |> element(".button") |> render_click()
-    assert content =~ "Turn LED ON </a>"
+    assert content =~ "Turn LED ON\n"
   end
 end
