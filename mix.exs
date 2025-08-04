@@ -70,7 +70,8 @@ defmodule TwinklyMaha.MixProject do
       {:cowlib, "~> 2.15.0", override: true},
       {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
       {:phoenix_html_helpers, "~> 1.0"},
-      {:phoenix_view, "~> 2.0"}
+      {:phoenix_view, "~> 2.0"},
+      {:lazy_html, ">= 0.1.0", only: :test}
     ]
   end
 
