@@ -54,7 +54,7 @@ defmodule TwinklyMaha.MixProject do
       {:phoenix_html, "~> 4.2.1"},
       {:phoenix_live_reload, "~> 1.6.0", only: :dev},
       {:phoenix_live_dashboard, "~> 0.8"},
-      {:telemetry_metrics, "~> 1.0.0"},
+      {:telemetry_metrics, "~> 1.1.0"},
       {:telemetry_poller, "~> 1.3.0"},
       {:sbom,
        only: :dev,
