@@ -44,7 +44,7 @@ defmodule TwinklyMaha.MixProject do
       {:ecto, ">= 3.12.0"},
       {:ecto_sql, "~> 3.12"},
       {:floki, ">= 0.0.0", only: :test},
-      {:gettext, "~> 0.26"},
+      {:gettext, "~> 1.0"},
       {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.7"},
       {:phoenix, "~> 1.7"},
