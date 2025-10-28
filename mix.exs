@@ -67,7 +67,7 @@ defmodule TwinklyMaha.MixProject do
       },
       {:emqtt, github: "emqx/emqtt", tag: "1.14.6", system_env: [{"BUILD_WITHOUT_QUIC", "1"}]},
       {:esbuild, "~> 0.10.0", runtime: Mix.env() == :dev},
-      {:cowlib, "~> 2.15.0", override: true},
+      {:cowlib, "~> 2.16.0", override: true},
       {:ex_doc, "~> 0.38.2", only: :dev, runtime: false},
       {:phoenix_html_helpers, "~> 1.0"},
       {:phoenix_view, "~> 2.0"},
