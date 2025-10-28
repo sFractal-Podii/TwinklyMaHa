@@ -19,7 +19,9 @@ defmodule TwinklyMahaWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: TwinklyMahaWeb
+      use Phoenix.Controller,
+        formats: [:html, :json],
+        layouts: [html: TwinklyMahaWeb.Layouts]
 
       import Plug.Conn
       use Gettext, backend: TwinklyMahaWeb.Gettext
