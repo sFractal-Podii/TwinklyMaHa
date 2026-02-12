@@ -41,14 +41,11 @@ defmodule TwinklyMaha.MixProject do
   defp deps do
     [
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
-      {:ecto, ">= 3.12.0"},
-      {:ecto_sql, "~> 3.12"},
       {:floki, ">= 0.0.0", only: :test},
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.7"},
       {:phoenix, "~> 1.7"},
-      {:phoenix_ecto, "~> 4.6"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_live_view, "~> 1.0"},
       {:phoenix_html, "~> 4.3.0"},

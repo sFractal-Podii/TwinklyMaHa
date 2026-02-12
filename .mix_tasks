@@ -21,16 +21,6 @@ deps.unlock:Unlocks the given dependencies
 deps.update:Updates the given dependencies
 do:Executes the tasks separated by plus
 docs:Generate documentation for the project
-ecto:Prints Ecto help information
-ecto.create:Creates the repository storage
-ecto.drop:Drops the repository storage
-ecto.dump:Dumps the repository database structure
-ecto.gen.migration:Generates a new migration for the repo
-ecto.gen.repo:Generates a new repository
-ecto.load:Loads previously dumped database structure
-ecto.migrate:Runs the repository migrations
-ecto.migrations:Displays the repository migration status
-ecto.rollback:Rolls back the repository migrations
 esbuild:Invokes esbuild with the profile and args
 esbuild.install:Installs esbuild under _build
 escript:Lists installed escripts

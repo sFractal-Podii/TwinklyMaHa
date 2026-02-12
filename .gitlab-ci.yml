@@ -23,6 +23,5 @@ deploy_to_production:
     - tar -xzf $CURRENT_APP.tar.gz --strip-components=0 -C $CURRENT_APP
     - cd $CURRENT_APP
     - bin/$APP_NAME stop || bin/$APP_NAME daemon
-    - bin/$APP_NAME eval "TwinklyMaha.Release.migrate"
     - bin/$APP_NAME daemon
     - EOF
