@@ -36,16 +36,13 @@ ulimit -n 65536
 ```
 
 To start the server:
+
 - Source the environment variables by running `source .env`.
 - Install dependencies with `mix setup`.
 - Install Node.js dependencies with `npm install` inside the `assets` directory
 - Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
-
-Here’s a cleaner, more polished version for your README:
-
----
 
 ## Testing Locally
 
