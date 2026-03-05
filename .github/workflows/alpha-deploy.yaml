@@ -39,8 +39,7 @@ jobs:
       uses: actions/checkout@v4
       with:
           fetch-depth: 0  #tells it to fetch the complete git history. We need because version extraction relies on reading the git tag (GITHUB_REF), and tags are part of the full history.
-
-
+          
     - name: Extract tag version and update mix.exs
         id: update_mix
         run: |
