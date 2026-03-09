@@ -37,12 +37,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check if version ends in -dev and branch is valid
+        id: check_version
+        run: |
+          VERSION=$(grep 'version:' mix.exs | sed -E 's/.*version: *"([^"]+)".*/\1/')
+          BRANCH="${GITHUB_REF_NAME}"
+          echo "Found version: $VERSION on branch: $BRANCH"
+          if [[ "$VERSION" == *-dev && ("$BRANCH" == "develop" || "$BRANCH" == "test-staging-deploy") ]]; then
+            echo "deploy=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "deploy=false" >> "$GITHUB_OUTPUT"
+          fi
+    
       - id: "auth"
+        if: steps.check_version.outputs.deploy == 'true'
         uses: "google-github-actions/auth@v2"
         with:
           credentials_json: ${{ secrets.GCE_SA_KEY }}
 
       - uses: google-github-actions/setup-gcloud@v2
+        if: steps.check_version.outputs.deploy == 'true'
         with:
           version: "506.0.0"
 
@@ -51,12 +65,14 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        if: steps.check_version.outputs.deploy == 'true'   
         run: |
           echo '${{ secrets.RELEASES_SECRETS }}' >> config/releases.exs
           docker build --build-arg DEPLOY_ENV=staging --tag "gcr.io/duncan-openc2-plugfest/twinklymaha:staging" .
 
       # Push the Docker image to Google Container Registry
       - name: Publish
+        if: steps.check_version.outputs.deploy == 'true'
         run: |-
           docker push "gcr.io/duncan-openc2-plugfest/twinklymaha:staging"
 
