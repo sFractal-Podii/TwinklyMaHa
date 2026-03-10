@@ -37,12 +37,27 @@ ulimit -n 65536
 
 To start the server:
 
-- Install dependencies with `mix deps.get`
-- Create and migrate your database with `mix ecto.setup`
+- Source the environment variables by running `source .env`.
+- Install dependencies with `mix setup`.
 - Install Node.js dependencies with `npm install` inside the `assets` directory
 - Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
+
+## Testing Locally
+
+To test **Blinky**, open [`http://localhost:8080/twinkly`](http://localhost:8080/twinkly) in your browser.
+
+You can test it independently by:
+
+* Turning the LED **on**
+* Changing the LED colors
+
+You can also test it with **Openc2Producer**. Make sure it is running locally, then perform the following actions:
+
+* Turn the LED **on**
+* Turn the LED **off**
+
 
 ## Convenience make tasks
 
